@@ -39,8 +39,17 @@ dependencies {
     def room_version = "2.2.6"
     def nav_version = "2.3.2"
 
+    //stetho
+    implementation 'com.facebook.stetho:stetho:1.5.1'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.1'
+    implementation 'com.facebook.stetho:stetho-urlconnection:1.5.1'
+    implementation 'com.facebook.stetho:stetho-js-rhino:1.5.1'
+
     //volley
     implementation 'com.android.volley:volley:1.1.1'
+
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 
     //Gson
     implementation 'com.google.code.gson:gson:2.8.6'
