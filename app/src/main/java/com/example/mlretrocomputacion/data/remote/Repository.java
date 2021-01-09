@@ -26,6 +26,9 @@ public class Repository {
 
     public Repository(){
 
+        this.listItem = new ArrayList<>();
+        this.mutableList = new MutableLiveData<>();
+
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addNetworkInterceptor(new StethoInterceptor())
                 .build();
@@ -40,25 +43,25 @@ public class Repository {
     }
 
     public MutableLiveData<List<Item>> getListRetroCategoryMutableList() {
-        this.listItem = new ArrayList<>();
-        this.mutableList = new MutableLiveData<>();
-        getListRetroCategory();
-        return mutableList;
-    }
-
-    public void getListRetroCategory(){
-
         Call<ItemResponse> call = mlApiService.getAllRetroGames();
         call.enqueue(new Callback<ItemResponse>() {
             @Override
             public void onResponse(Call<ItemResponse> call, Response<ItemResponse> response) {
-
-                System.out.println("conectado");
                 for (int i=0; i< response.body().getResults().size(); i++){
-
                     Item item = new Item();
+                    item.setIdItem(response.body().getResults().get(i).getId());
+                    item.setIdUser(response.body().getResults().get(i).getSeller().getId());
                     item.setItemTitle(response.body().getResults().get(i).getTitle());
                     item.setItemPrice(response.body().getResults().get(i).getPrice());
+                    item.setThumbnail(response.body().getResults().get(i).getThumbnail());
+
+                    String full_reputation = response.body().getResults().get(i).getSeller().getSellerReputation().getLevelId();
+                    String[] parts = full_reputation.split("_");
+                    String number_reputation = parts[0];
+                    String color_reputation = parts[1];
+                    item.setLevel_reputation(number_reputation);
+                    item.setColor_reputacion(color_reputation);
+
                     listItem.add(item);
                 }
                 mutableList.setValue(listItem);
@@ -68,5 +71,6 @@ public class Repository {
                 Log.i(TAG, "Call Retrofit onFailure: " + t.toString());
             }
         });
+        return mutableList;
     }
 }

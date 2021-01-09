@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailsFragment"
+    android:layout_margin="8dp">
+
+    <TextView
+        android:id="@+id/tvDetailsCondition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Condicion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvDetailsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Titulo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailsCondition" />
+
+    <TextView
+        android:id="@+id/tvDetailsPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Precio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailsTitle" />
+
+    <TextView
+        android:id="@+id/tvDetailsReputacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reputacion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailsUsuario" />
+
+    <TextView
+        android:id="@+id/tvDetailsUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Usuario"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailsNumberQuestions" />
+
+    <TextView
+        android:id="@+id/tvDetailsState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Provincia"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailsSales" />
+
+    <TextView
+        android:id="@+id/tvDetailsCiudad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ciudad"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailsState" />
+
+    <TextView
+        android:id="@+id/tvDetailsYearRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Usuario desde"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailsReputacion" />
+
+    <TextView
+        android:id="@+id/tvDetailsSales"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cantidad de ventas"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailsYearRegister" />
+
+    <TextView
+        android:id="@+id/tvDetailsNumberQuestions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cantidad preguntas"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailsPrice" />
+
+    <Button
+        android:id="@+id/btnDetailsLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="continuar a la pagina"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailsCiudad" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

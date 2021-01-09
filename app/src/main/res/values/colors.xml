@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="reputation_red">#ff0000</color>
+    <color name="reputation_orange">#ff8000</color>
+    <color name="reputation_yellow">#FFBF00</color>
+    <color name="reputation_light_green">#90ee90</color>
+    <color name="reputation_green">#008f39</color>
 </resources>
