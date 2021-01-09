@@ -4,16 +4,22 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.mlretrocomputacion.data.Model.Item;
+import com.example.mlretrocomputacion.data.remote.Repository;
+
+import java.util.List;
+
 public class HomeViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private Repository repository;
+    private MutableLiveData<List<Item>> mRetroCategoryList;
 
     public HomeViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        repository = new Repository();
+        mRetroCategoryList = repository.getListRetroCategoryMutableList();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public MutableLiveData<List<Item>> getListRetroCategory() {
+        return mRetroCategoryList;
     }
 }
