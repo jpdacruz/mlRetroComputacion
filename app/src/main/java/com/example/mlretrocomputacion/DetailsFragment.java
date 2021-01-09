@@ -10,13 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.mlretrocomputacion.data.Model.Item;
+import com.example.mlretrocomputacion.data.mvp.DetailsInterface;
+import com.example.mlretrocomputacion.data.mvp.DetailsPresenter;
 import com.example.mlretrocomputacion.databinding.FragmentDetailsBinding;
 
-public class DetailsFragment extends Fragment {
+public class DetailsFragment extends Fragment implements DetailsInterface.view {
 
     //vars
     private static final String TAG = "DetailsFragment";
-
+    private String idItem;
+    private Integer idUser;
+    private DetailsInterface.presenter presenter;
     //widgets
     private FragmentDetailsBinding binding;
 
@@ -28,7 +33,8 @@ public class DetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
+            idItem = DetailsFragmentArgs.fromBundle(getArguments()).getIdItem();
+            idUser = DetailsFragmentArgs.fromBundle(getArguments()).getIdUser();
         }
     }
 
@@ -49,5 +55,15 @@ public class DetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        //call the presenter
+        presenter = new DetailsPresenter(this);
+        presenter.getItemDetails(idItem);
+    }
+
+    @Override
+    public void showResult(String item, int codResult) {
+
+        System.out.println(item + " " + codResult);
     }
 }
