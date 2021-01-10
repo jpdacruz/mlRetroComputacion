@@ -3,6 +3,8 @@ package com.example.mlretrocomputacion.data.mvp;
 import android.util.Log;
 
 import com.example.mlretrocomputacion.data.Model.DetailModel;
+import com.example.mlretrocomputacion.data.Model.QuestionModel;
+import com.example.mlretrocomputacion.data.Model.UserModel;
 import com.example.mlretrocomputacion.data.remote.MlApiService;
 import com.example.mlretrocomputacion.utils.Constants;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
@@ -30,7 +32,7 @@ public class DetailsRepository implements DetailsInterface.repository{
     @Override
     public void getItemDetails(String idItem) {
 
-        createRetrofitConection(Constants.URL_DETAIL_ITEM);
+        createRetrofitConection(Constants.URL_BASE);
         Call<DetailModel> call = mlApiService.getDetailItem(idItem);
         call.enqueue(new Callback<DetailModel>() {
             @Override
@@ -48,7 +50,7 @@ public class DetailsRepository implements DetailsInterface.repository{
                     String picture = response.body().getPictures().get(i).getUrl();
                     pictures.add(picture);
                 }
-                presenter.showItemResult(title,condition,price,city,state,permalink,pictures, 1);
+                presenter.showItemResult(title,condition,price,city,state,permalink,pictures);
             }
 
             @Override
@@ -61,9 +63,47 @@ public class DetailsRepository implements DetailsInterface.repository{
 
     @Override
     public void getUserDetails(Integer idUser) {
-        //createRetrofitConection();
+        createRetrofitConection(Constants.URL_BASE);
+        Call<UserModel> call = mlApiService.getDetailUser(idUser);
+        call.enqueue(new Callback<UserModel>() {
+            @Override
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
 
+                String usuario = response.body().getNickname();
 
+                String registerSinceFull = response.body().getRegistrationDate();
+                String[] parts = registerSinceFull.split("-");
+                String registerSince = parts[0];
+
+                Integer transactions = response.body().getSellerReputation().getTransactions().getTotal();
+                presenter.showUserResult(usuario,registerSince,transactions);
+            }
+
+            @Override
+            public void onFailure(Call<UserModel> call, Throwable t) {
+                Log.i(TAG, "onFailure: " + t.toString());
+            }
+        });
+    }
+
+    @Override
+    public void getItemQuestions(String idItem) {
+        createRetrofitConection(Constants.URL_QUESTION);
+        String apiVersion = "2#json";
+        Call<QuestionModel> call = mlApiService.getQuestionItem(idItem,apiVersion);
+        call.enqueue(new Callback<QuestionModel>() {
+            @Override
+            public void onResponse(Call<QuestionModel> call, Response<QuestionModel> response) {
+
+                int totalQuestions = response.body().getTotal();
+                presenter.showQuestionResult(totalQuestions);
+            }
+
+            @Override
+            public void onFailure(Call<QuestionModel> call, Throwable t) {
+                Log.i(TAG, "onFailure: " + t.toString());
+            }
+        });
     }
 
     private void createRetrofitConection(String baseUrl) {

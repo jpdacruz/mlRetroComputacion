@@ -14,16 +14,23 @@ public class DetailsPresenter implements DetailsInterface.presenter {
 
     @Override
     public void showItemResult
-            (String title, String condition, Double price, String city, String state, String permalink, List<String> pictures, int codResult) {
+            (String title, String condition, Double price, String city, String state, String permalink, List<String> pictures) {
         if (view!=null){
-            view.showItemResult(title, condition, price, city, state, permalink,pictures, codResult);
+            view.showItemResult(title, condition, price, city, state, permalink,pictures);
         }
     }
 
     @Override
-    public void showUserResult(int cod) {
+    public void showUserResult(String usuario, String registerSince, Integer transactions) {
         if (view!=null){
-            view.showUserResult(cod);
+            view.showUserResult(usuario,registerSince,transactions);
+        }
+    }
+
+    @Override
+    public void showQuestionResult(int cod) {
+        if (view!=null){
+            view.showQuestionResult(cod);
         }
     }
 
@@ -38,6 +45,13 @@ public class DetailsPresenter implements DetailsInterface.presenter {
     public void getUserDetails(Integer idUser) {
         if (view!=null){
             model.getUserDetails(idUser);
+        }
+    }
+
+    @Override
+    public void getItemQuestions(String idItem) {
+        if (view!=null){
+            model.getItemQuestions(idItem);
         }
     }
 }
