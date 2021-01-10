@@ -3,17 +3,14 @@ package com.example.mlretrocomputacion.data.mvp;
 import android.util.Log;
 
 import com.example.mlretrocomputacion.data.Model.DetailModel;
-import com.example.mlretrocomputacion.data.Model.Item;
 import com.example.mlretrocomputacion.data.remote.MlApiService;
 import com.example.mlretrocomputacion.utils.Constants;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
-import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,18 +30,7 @@ public class DetailsRepository implements DetailsInterface.repository{
     @Override
     public void getItemDetails(String idItem) {
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addNetworkInterceptor(new StethoInterceptor())
-                .build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.URL_DETAIL_ITEM)
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        mlApiService = retrofit.create(MlApiService.class);
-
+        createRetrofitConection(Constants.URL_DETAIL_ITEM);
         Call<DetailModel> call = mlApiService.getDetailItem(idItem);
         call.enqueue(new Callback<DetailModel>() {
             @Override
@@ -62,7 +48,7 @@ public class DetailsRepository implements DetailsInterface.repository{
                     String picture = response.body().getPictures().get(i).getUrl();
                     pictures.add(picture);
                 }
-                presenter.showResult(title,condition,price,city,state,permalink,pictures, 1);
+                presenter.showItemResult(title,condition,price,city,state,permalink,pictures, 1);
             }
 
             @Override
@@ -71,6 +57,28 @@ public class DetailsRepository implements DetailsInterface.repository{
                 Log.i(TAG, "onFailure: " + t.toString());
             }
         });
+    }
+
+    @Override
+    public void getUserDetails(Integer idUser) {
+        //createRetrofitConection();
+
 
     }
+
+    private void createRetrofitConection(String baseUrl) {
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addNetworkInterceptor(new StethoInterceptor())
+                .build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        mlApiService = retrofit.create(MlApiService.class);
+    }
+
+
 }

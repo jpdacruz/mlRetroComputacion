@@ -70,11 +70,24 @@ public class DetailsFragment extends Fragment implements DetailsInterface.view {
         binding.recyclerViewPictures.setAdapter(adapter);
 
         presenter.getItemDetails(idItem);
+
     }
 
     @Override
-    public void showResult(String title, String condition, Double price, String city, String state, String permalink, List<String> mPictures,int codResult) {
+    public void showItemResult(String title, String condition, Double price, String city, String state, String permalink, List<String> mPictures, int codResult) {
+        binding.tvDetailsCondition.setText(String.format("Estado: %s", condition));
+        binding.tvDetailsTitle.setText(title);
+        binding.tvDetailsPrice.setText(String.format("$%s", price));
+        binding.tvDetailsCiudad.setText(String.format("Ciudad: %s", city));
+        binding.tvDetailsState.setText(String.format("Provincia: %s", state));
         pictures = mPictures;
         adapter.setData(pictures);
+    }
+
+    @Override
+    public void showUserResult(int cod) {
+
+
+
     }
 }
