@@ -15,6 +15,8 @@ import com.example.mlretrocomputacion.data.mvp.DetailsInterface;
 import com.example.mlretrocomputacion.data.mvp.DetailsPresenter;
 import com.example.mlretrocomputacion.databinding.FragmentDetailsBinding;
 
+import java.util.List;
+
 public class DetailsFragment extends Fragment implements DetailsInterface.view {
 
     //vars
@@ -55,15 +57,14 @@ public class DetailsFragment extends Fragment implements DetailsInterface.view {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         //call the presenter
         presenter = new DetailsPresenter(this);
         presenter.getItemDetails(idItem);
     }
 
     @Override
-    public void showResult(String item, int codResult) {
+    public void showResult(String title, String condition, Double price, String city, String state, String permalink, List<String> pictures,int codResult) {
+        List<String> mPictures = pictures;
 
-        System.out.println(item + " " + codResult);
     }
 }

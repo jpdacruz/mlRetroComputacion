@@ -2,6 +2,8 @@ package com.example.mlretrocomputacion.data.mvp;
 
 import com.example.mlretrocomputacion.data.Model.Item;
 
+import java.util.List;
+
 public class DetailsPresenter implements DetailsInterface.presenter {
 
     private DetailsInterface.view view;
@@ -13,9 +15,10 @@ public class DetailsPresenter implements DetailsInterface.presenter {
     }
 
     @Override
-    public void showResult(String item, int codResult) {
+    public void showResult
+            (String title, String condition, Double price, String city, String state, String permalink, List<String> pictures, int codResult) {
         if (view!=null){
-            view.showResult(item, codResult);
+            view.showResult(title, condition, price, city, state, permalink,pictures, codResult);
         }
     }
 
