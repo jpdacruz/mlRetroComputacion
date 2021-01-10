@@ -20,7 +20,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Repository {
 
     private static final String TAG = "Repository";
-    private final MlApiService mlApiService;
     private MutableLiveData<List<Item>> mutableList;
     private List<Item> listItem;
 
@@ -28,22 +27,13 @@ public class Repository {
 
         this.listItem = new ArrayList<>();
         this.mutableList = new MutableLiveData<>();
-
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addNetworkInterceptor(new StethoInterceptor())
-                .build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.URLMAIN)
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        mlApiService = retrofit.create(MlApiService.class);
     }
 
     public MutableLiveData<List<Item>> getListRetroCategoryMutableList() {
-        Call<ItemResponse> call = mlApiService.getAllRetroGames();
+
+        Call<ItemResponse> call =
+                RetrofitSingleton.getInstance().getMlApiService().getAllRetroGames();
+
         call.enqueue(new Callback<ItemResponse>() {
             @Override
             public void onResponse(Call<ItemResponse> call, Response<ItemResponse> response) {

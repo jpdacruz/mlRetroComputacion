@@ -17,7 +17,7 @@ import retrofit2.http.Query;
 
 public interface MlApiService {
 
-    @GET("search?q=retro%game&category=MLA438566")
+    @GET("sites/MLA/search?q=retro%game&category=MLA438566")
     Call<ItemResponse> getAllRetroGames();
 
     @GET("items/{idItem}")
@@ -30,7 +30,7 @@ public interface MlApiService {
             @Path("idUser") Integer idUser
     );
 
-    @GET("search?")
+    @GET("questions/search?")
     Call<QuestionModel> getQuestionItem(
             @Query("item") String idItem,
             @Query("api_version") String apiVersion

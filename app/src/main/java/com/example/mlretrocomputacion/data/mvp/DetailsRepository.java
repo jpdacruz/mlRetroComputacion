@@ -6,6 +6,7 @@ import com.example.mlretrocomputacion.data.Model.DetailModel;
 import com.example.mlretrocomputacion.data.Model.QuestionModel;
 import com.example.mlretrocomputacion.data.Model.UserModel;
 import com.example.mlretrocomputacion.data.remote.MlApiService;
+import com.example.mlretrocomputacion.data.remote.RetrofitSingleton;
 import com.example.mlretrocomputacion.utils.Constants;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 
@@ -23,7 +24,6 @@ public class DetailsRepository implements DetailsInterface.repository{
 
     private static final String TAG = "DetailsModel";
     private DetailsInterface.presenter presenter;
-    private MlApiService mlApiService;
 
     public DetailsRepository(DetailsInterface.presenter presenter) {
         this.presenter = presenter;
@@ -32,8 +32,9 @@ public class DetailsRepository implements DetailsInterface.repository{
     @Override
     public void getItemDetails(String idItem) {
 
-        createRetrofitConection(Constants.URL_BASE);
-        Call<DetailModel> call = mlApiService.getDetailItem(idItem);
+        Call<DetailModel> call =
+                RetrofitSingleton.getInstance().getMlApiService().getDetailItem(idItem);
+
         call.enqueue(new Callback<DetailModel>() {
             @Override
             public void onResponse(Call<DetailModel> call, Response<DetailModel> response) {
@@ -63,8 +64,10 @@ public class DetailsRepository implements DetailsInterface.repository{
 
     @Override
     public void getUserDetails(Integer idUser) {
-        createRetrofitConection(Constants.URL_BASE);
-        Call<UserModel> call = mlApiService.getDetailUser(idUser);
+
+        Call<UserModel> call =
+                RetrofitSingleton.getInstance().getMlApiService().getDetailUser(idUser);
+
         call.enqueue(new Callback<UserModel>() {
             @Override
             public void onResponse(Call<UserModel> call, Response<UserModel> response) {
@@ -88,9 +91,10 @@ public class DetailsRepository implements DetailsInterface.repository{
 
     @Override
     public void getItemQuestions(String idItem) {
-        createRetrofitConection(Constants.URL_QUESTION);
-        String apiVersion = "2#json";
-        Call<QuestionModel> call = mlApiService.getQuestionItem(idItem,apiVersion);
+
+        Call<QuestionModel> call =
+                RetrofitSingleton.getInstance().getMlApiService().getQuestionItem(idItem,Constants.API_VERSION);
+
         call.enqueue(new Callback<QuestionModel>() {
             @Override
             public void onResponse(Call<QuestionModel> call, Response<QuestionModel> response) {
@@ -105,20 +109,4 @@ public class DetailsRepository implements DetailsInterface.repository{
             }
         });
     }
-
-    private void createRetrofitConection(String baseUrl) {
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addNetworkInterceptor(new StethoInterceptor())
-                .build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        mlApiService = retrofit.create(MlApiService.class);
-    }
-
-
 }
