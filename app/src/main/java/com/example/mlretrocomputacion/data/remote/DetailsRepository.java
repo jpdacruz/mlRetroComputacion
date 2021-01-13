@@ -1,10 +1,11 @@
-package com.example.mlretrocomputacion.data.mvp;
+package com.example.mlretrocomputacion.data.remote;
 
 import android.util.Log;
 
 import com.example.mlretrocomputacion.data.Model.DetailModel;
 import com.example.mlretrocomputacion.data.Model.QuestionModel;
 import com.example.mlretrocomputacion.data.Model.UserModel;
+import com.example.mlretrocomputacion.data.mvp.DetailsInterface;
 import com.example.mlretrocomputacion.data.remote.MlApiService;
 import com.example.mlretrocomputacion.data.remote.RetrofitSingleton;
 import com.example.mlretrocomputacion.utils.Constants;
@@ -20,7 +21,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class DetailsRepository implements DetailsInterface.repository{
+public class DetailsRepository implements DetailsInterface.repository {
 
     private static final String TAG = "DetailsModel";
     private DetailsInterface.presenter presenter;
@@ -39,19 +40,32 @@ public class DetailsRepository implements DetailsInterface.repository{
             @Override
             public void onResponse(Call<DetailModel> call, Response<DetailModel> response) {
 
-                String title = response.body().getTitle();
-                String condition = response.body().getCondition();
-                Double price = response.body().getPrice();
-                String city = response.body().getSellerAddress().getCity().getName();
-                String state = response.body().getSellerAddress().getState().getName();
-                String permalink = response.body().getPermalink();
+                List<String> pictures= new ArrayList<>();;
 
-                List<String> pictures = new ArrayList<>();
-                for (int i=0; i<response.body().getPictures().size(); i++){
-                    String picture = response.body().getPictures().get(i).getUrl();
-                    pictures.add(picture);
+                try{
+                    String title = response.body().getTitle();
+                    String condition = response.body().getCondition();
+                    Double price = response.body().getPrice();
+                    String city = response.body().getSellerAddress().getCity().getName();
+                    String state = response.body().getSellerAddress().getState().getName();
+                    String permalink = response.body().getPermalink();
+
+                    try{
+                        for (int i=0; i<response.body().getPictures().size(); i++){
+                            String picture = response.body().getPictures().get(i).getUrl();
+                            pictures.add(picture);
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        Log.e(TAG, e.getMessage());
+                    }
+
+                    presenter.showItemResult(title,condition,price,city,state,permalink,pictures);
+
+                }catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e(TAG, e.getMessage());
                 }
-                presenter.showItemResult(title,condition,price,city,state,permalink,pictures);
             }
 
             @Override
@@ -72,14 +86,20 @@ public class DetailsRepository implements DetailsInterface.repository{
             @Override
             public void onResponse(Call<UserModel> call, Response<UserModel> response) {
 
-                String usuario = response.body().getNickname();
+                try{
+                    String usuario = response.body().getNickname();
 
-                String registerSinceFull = response.body().getRegistrationDate();
-                String[] parts = registerSinceFull.split("-");
-                String registerSince = parts[0];
+                    String registerSinceFull = response.body().getRegistrationDate();
+                    String[] parts = registerSinceFull.split("-");
+                    String registerSince = parts[0];
 
-                Integer transactions = response.body().getSellerReputation().getTransactions().getTotal();
-                presenter.showUserResult(usuario,registerSince,transactions);
+                    Integer transactions = response.body().getSellerReputation().getTransactions().getTotal();
+                    presenter.showUserResult(usuario,registerSince,transactions);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Log.e(TAG,e.getMessage());
+                }
             }
 
             @Override
@@ -99,8 +119,16 @@ public class DetailsRepository implements DetailsInterface.repository{
             @Override
             public void onResponse(Call<QuestionModel> call, Response<QuestionModel> response) {
 
-                int totalQuestions = response.body().getTotal();
-                presenter.showQuestionResult(totalQuestions);
+                int totalQuestions = 0;
+
+                try{
+                    totalQuestions = response.body().getTotal();
+                    presenter.showQuestionResult(totalQuestions);
+
+                }catch(Exception e){
+                    e.printStackTrace();
+                    Log.e(TAG,e.getMessage());
+                }
             }
 
             @Override

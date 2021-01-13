@@ -37,23 +37,38 @@ public class Repository {
         call.enqueue(new Callback<ItemResponse>() {
             @Override
             public void onResponse(Call<ItemResponse> call, Response<ItemResponse> response) {
-                for (int i=0; i< response.body().getResults().size(); i++){
-                    Item item = new Item();
-                    item.setIdItem(response.body().getResults().get(i).getId());
-                    item.setIdUser(response.body().getResults().get(i).getSeller().getId());
-                    item.setItemTitle(response.body().getResults().get(i).getTitle());
-                    item.setItemPrice(response.body().getResults().get(i).getPrice());
-                    item.setThumbnail(response.body().getResults().get(i).getThumbnail());
 
-                    String full_reputation = response.body().getResults().get(i).getSeller().getSellerReputation().getLevelId();
-                    String[] parts = full_reputation.split("_");
-                    String number_reputation = parts[0];
-                    String color_reputation = parts[1];
-                    item.setLevel_reputation(number_reputation);
-                    item.setColor_reputacion(color_reputation);
+                try{
+                    for (int i=0; i< response.body().getResults().size(); i++){
+                        Item item = new Item();
+                        item.setIdItem(response.body().getResults().get(i).getId());
+                        item.setIdUser(response.body().getResults().get(i).getSeller().getId());
+                        item.setItemTitle(response.body().getResults().get(i).getTitle());
+                        item.setItemPrice(response.body().getResults().get(i).getPrice());
+                        item.setThumbnail(response.body().getResults().get(i).getThumbnail());
 
-                    listItem.add(item);
+                        try{
+                            String full_reputation = response.body().getResults().get(i).getSeller().getSellerReputation().getLevelId();
+                            String[] parts = full_reputation.split("_");
+                            String number_reputation = parts[0];
+                            String color_reputation = parts[1];
+                            item.setLevel_reputation(number_reputation);
+                            item.setColor_reputacion(color_reputation);
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            Log.e(TAG, e.getMessage());
+                        }
+
+                        listItem.add(item);
+                    }
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Log.e(TAG, e.getMessage());
                 }
+
+
                 mutableList.setValue(listItem);
             }
             @Override
