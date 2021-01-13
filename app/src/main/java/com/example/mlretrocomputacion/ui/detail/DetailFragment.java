@@ -6,14 +6,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.example.mlretrocomputacion.data.Model.Item;
 import com.example.mlretrocomputacion.data.mvp.DetailsInterface;
 import com.example.mlretrocomputacion.data.mvp.DetailsPresenter;
 import com.example.mlretrocomputacion.databinding.FragmentDetailsBinding;
+import com.example.mlretrocomputacion.ui.home.HomeFragmentDirections;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -25,10 +33,10 @@ import static com.example.mlretrocomputacion.R.color.reputation_orange;
 import static com.example.mlretrocomputacion.R.color.reputation_red;
 import static com.example.mlretrocomputacion.R.color.reputation_yellow;
 
-public class DetailsFragment extends Fragment implements DetailsInterface.view {
+public class DetailFragment extends Fragment implements DetailsInterface.view {
 
     //vars
-    private static final String TAG = "DetailsFragment";
+    private static final String TAG = "DetailFragment";
     private String idItem, colorReputation, levelReputation;
     private Integer idUser;
     private DetailsInterface.presenter presenter;
@@ -37,7 +45,7 @@ public class DetailsFragment extends Fragment implements DetailsInterface.view {
     private FragmentDetailsBinding binding;
     private DetailAdapter adapter;
 
-    public DetailsFragment() {
+    public DetailFragment() {
         // Required empty public constructor
     }
 
@@ -45,10 +53,10 @@ public class DetailsFragment extends Fragment implements DetailsInterface.view {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            idItem = DetailsFragmentArgs.fromBundle(getArguments()).getIdItem();
-            idUser = DetailsFragmentArgs.fromBundle(getArguments()).getIdUser();
-            colorReputation = DetailsFragmentArgs.fromBundle(getArguments()).getColorReputation();
-            levelReputation = DetailsFragmentArgs.fromBundle(getArguments()).getLevelReputation();
+            idItem = DetailFragmentArgs.fromBundle(getArguments()).getIdItem();
+            idUser = DetailFragmentArgs.fromBundle(getArguments()).getIdUser();
+            colorReputation = DetailFragmentArgs.fromBundle(getArguments()).getColorReputation();
+            levelReputation = DetailFragmentArgs.fromBundle(getArguments()).getLevelReputation();
         }
     }
 
@@ -70,18 +78,27 @@ public class DetailsFragment extends Fragment implements DetailsInterface.view {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //call the presenter
-        presenter = new DetailsPresenter(this);
-        pictures = new ArrayList<>();
 
+        pictures = new ArrayList<>();
+        setAdapter();
+        setListener();
+
+        presenter = new DetailsPresenter(this);
+        presenter.getItemDetails(idItem);
+        presenter.getUserDetails(idUser);
+        presenter.getItemQuestions(idItem);
+    }
+
+    private void setAdapter() {
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         binding.recyclerViewPictures.setLayoutManager(layoutManager);
         adapter = new DetailAdapter(pictures,getContext());
         binding.recyclerViewPictures.setAdapter(adapter);
+    }
 
-        presenter.getItemDetails(idItem);
-        presenter.getUserDetails(idUser);
-        presenter.getItemQuestions(idItem);
+    private void setListener() {
+        adapter.setOnClickListener(v -> goToDialogImage(v));
     }
 
     @Override
@@ -106,7 +123,7 @@ public class DetailsFragment extends Fragment implements DetailsInterface.view {
             case "green":
                 binding.tvDetailsReputacion.setTextColor(ContextCompat.getColor(getContext(),reputation_green));
                 break;
-            case "light_green":
+            case "light":
                 binding.tvDetailsReputacion.setTextColor(ContextCompat.getColor(getContext(), reputation_light_green));
                 break;
             case "yellow":
@@ -125,5 +142,25 @@ public class DetailsFragment extends Fragment implements DetailsInterface.view {
     public void showQuestionResult(int totalQuestions) {
 
        binding.tvDetailsNumberQuestions.setText(MessageFormat.format("Preguntas realizadas: {0}", totalQuestions));
+    }
+
+    private void goToDialogImage(View view) {
+
+        try{
+            String picture = pictures.get(binding.recyclerViewPictures.getChildAdapterPosition(view));
+            Log.i(TAG, "PICTURE: " + picture);
+            if (picture != null){
+                DialogDetailFragment dialogF = new DialogDetailFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("picture", picture);
+                dialogF.setArguments(bundle);
+                dialogF.show(getChildFragmentManager(),TAG);
+            }else {
+                Toast.makeText(getContext(), "No hay foto para mostrar", Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.d(TAG, "goToDialogImage: " + e.getMessage());
+        }
     }
 }

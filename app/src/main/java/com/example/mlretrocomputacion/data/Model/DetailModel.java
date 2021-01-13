@@ -32,7 +32,7 @@ public class DetailModel {
     private Double price;
     @SerializedName("base_price")
     @Expose
-    private Integer basePrice;
+    private Double basePrice;
     @SerializedName("original_price")
     @Expose
     private Object originalPrice;
@@ -227,11 +227,11 @@ public class DetailModel {
         this.price = price;
     }
 
-    public Integer getBasePrice() {
+    public Double getBasePrice() {
         return basePrice;
     }
 
-    public void setBasePrice(Integer basePrice) {
+    public void setBasePrice(Double basePrice) {
         this.basePrice = basePrice;
     }
 

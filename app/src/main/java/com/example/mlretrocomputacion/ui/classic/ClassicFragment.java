@@ -21,7 +21,7 @@ import com.example.mlretrocomputacion.R;
 import com.example.mlretrocomputacion.data.Model.Item;
 import com.example.mlretrocomputacion.databinding.FragmentClassicBinding;
 import com.example.mlretrocomputacion.databinding.FragmentHomeBinding;
-import com.example.mlretrocomputacion.ui.detail.DetailsFragmentArgs;
+import com.example.mlretrocomputacion.ui.detail.DialogDetailFragment;
 import com.example.mlretrocomputacion.ui.home.HomeAdapter;
 import com.example.mlretrocomputacion.ui.home.HomeFragmentDirections;
 import com.example.mlretrocomputacion.ui.home.HomeViewModel;
@@ -70,7 +70,6 @@ public class ClassicFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         setAdapter();
         setListener();
         getListClassicConsoles(mConsola);
@@ -108,4 +107,5 @@ public class ClassicFragment extends Fragment {
         NavDirections action = ClassicFragmentDirections.actionClassicFragmentToDetailsFragment(idUser,idItem, colorReputation, levelReputation);
         navController.navigate(action);
     }
+
 }

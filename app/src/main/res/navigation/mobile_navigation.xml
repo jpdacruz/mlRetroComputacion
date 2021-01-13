@@ -31,7 +31,7 @@
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.example.mlretrocomputacion.ui.detail.DetailsFragment"
+        android:name="com.example.mlretrocomputacion.ui.detail.DetailFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details" >
         <argument

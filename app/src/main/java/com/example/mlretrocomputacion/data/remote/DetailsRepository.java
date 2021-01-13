@@ -125,10 +125,14 @@ public class DetailsRepository implements DetailsInterface.repository {
             @Override
             public void onResponse(Call<QuestionModel> call, Response<QuestionModel> response) {
 
-                int totalQuestions;
+                Integer totalQuestions;
 
                 try{
                     totalQuestions = response.body().getTotal();
+
+                    if (totalQuestions == null){
+                        totalQuestions = 0;
+                    }
                     presenter.showQuestionResult(totalQuestions);
 
                 }catch(Exception e){
