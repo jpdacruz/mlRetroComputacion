@@ -62,7 +62,7 @@ public class HomeAdapter
             case "green":
                 holder.tvLevelReputation.setTextColor(ContextCompat.getColor(context,reputation_green));
                 break;
-            case "light_green":
+            case "light":
                 holder.tvLevelReputation.setTextColor(ContextCompat.getColor(context, reputation_light_green));
                 break;
             case "yellow":

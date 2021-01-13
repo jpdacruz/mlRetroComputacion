@@ -88,10 +88,16 @@ public class DetailsRepository implements DetailsInterface.repository {
 
                 try{
                     String usuario = response.body().getNickname();
+                    String registerSinceFull;
+                    String registerSince;
+                    registerSinceFull = response.body().getRegistrationDate();
 
-                    String registerSinceFull = response.body().getRegistrationDate();
-                    String[] parts = registerSinceFull.split("-");
-                    String registerSince = parts[0];
+                    if(registerSinceFull != null){
+                        String[] parts = registerSinceFull.split("-");
+                        registerSince = parts[0];
+                    }else {
+                        registerSince = "sin datos";
+                    }
 
                     Integer transactions = response.body().getSellerReputation().getTransactions().getTotal();
                     presenter.showUserResult(usuario,registerSince,transactions);
@@ -119,7 +125,7 @@ public class DetailsRepository implements DetailsInterface.repository {
             @Override
             public void onResponse(Call<QuestionModel> call, Response<QuestionModel> response) {
 
-                int totalQuestions = 0;
+                int totalQuestions;
 
                 try{
                     totalQuestions = response.body().getTotal();

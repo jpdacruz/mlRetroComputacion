@@ -54,7 +54,7 @@ public class Repository {
                         item.setThumbnail(response.body().getResults().get(i).getThumbnail());
 
                         try{
-                            String full_reputation = null;
+                            String full_reputation;
                             String number_reputation;
                             String color_reputation;
 
