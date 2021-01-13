@@ -24,7 +24,6 @@
             android:id="@+id/ivAtari"
             android:layout_width="@dimen/classic_button_size"
             android:layout_height="@dimen/classic_button_size"
-            android:onClick="getClassicRetroList"
             android:background="@color/white"
             android:scaleType="centerCrop"
             android:src="@drawable/logoatari" />
@@ -101,11 +100,11 @@
         android:id="@+id/recyclerHome"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
         tools:listitem="@layout/item_list_home" />
 
 

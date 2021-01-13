@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_home_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_classicFragment"
+            app:destination="@id/classicFragment" />
     </fragment>
 
     <fragment
@@ -42,6 +45,15 @@
             app:argType="string" />
         <argument
             android:name="levelReputation"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/classicFragment"
+        android:name="com.example.mlretrocomputacion.ui.classic.ClassicFragment"
+        android:label="fragment_classic"
+        tools:layout="@layout/fragment_classic" >
+        <argument
+            android:name="consola"
             app:argType="string" />
     </fragment>
 </navigation>

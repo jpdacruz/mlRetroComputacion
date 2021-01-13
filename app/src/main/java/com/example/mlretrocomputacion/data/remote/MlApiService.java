@@ -20,6 +20,11 @@ public interface MlApiService {
     @GET("sites/MLA/search?q=retro%game&category=MLA438566")
     Call<ItemResponse> getAllRetroGames();
 
+    @GET("sites/MLA/search?category=MLA438566")
+    Call<ItemResponse> getClassicRetroList(
+            @Query("q") String consola
+    );
+
     @GET("items/{idItem}")
     Call<DetailModel> getDetailItem(
             @Path("idItem") String idItem

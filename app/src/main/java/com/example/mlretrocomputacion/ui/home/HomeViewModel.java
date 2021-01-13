@@ -1,6 +1,5 @@
 package com.example.mlretrocomputacion.ui.home;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -19,7 +18,13 @@ public class HomeViewModel extends ViewModel {
     }
 
     public MutableLiveData<List<Item>> getListRetroCategory() {
-        mRetroCategoryList = repository.getListRetroCategoryMutableList();
+        mRetroCategoryList = repository.getListRetroCategory();
         return mRetroCategoryList;
     }
+
+    public MutableLiveData<List<Item>> getListRetroClassic(String consola) {
+        mRetroCategoryList = repository.getListRetroClassic(consola);
+        return mRetroCategoryList;
+    }
+
 }

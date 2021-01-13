@@ -5,8 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,7 +15,6 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.mlretrocomputacion.R;
 import com.example.mlretrocomputacion.data.Model.Item;
 import com.example.mlretrocomputacion.databinding.FragmentHomeBinding;
 
@@ -73,16 +70,18 @@ public class HomeFragment extends Fragment{
     }
 
     private void setListener() {
-        adapter.setOnClickListener(view1 -> goToDetails(view1));
-        binding.ivAtari.setOnClickListener(v -> getClassicList("atari"));
-        binding.ivCommodore.setOnClickListener(v -> getClassicList("commodore"));
-        binding.ivSinclair.setOnClickListener(v -> getClassicList("sinclair"));
-        binding.ivMsx.setOnClickListener(v -> getClassicList("msx"));
+
+        adapter.setOnClickListener(view -> goToDetails(view));
+        binding.ivAtari.setOnClickListener(v -> goToClassicList(v, "atari"));
+        binding.ivCommodore.setOnClickListener(v -> goToClassicList(v, "commodore"));
+        binding.ivSinclair.setOnClickListener(v -> goToClassicList(v, "sinclair"));
+        binding.ivMsx.setOnClickListener(v -> goToClassicList(v, "msx"));
     }
 
-    private void getClassicList(String searchQuery) {
-        
-
+    private void goToClassicList(View v, String consola) {
+        NavController navController = Navigation.findNavController(v);
+        NavDirections action = HomeFragmentDirections.actionNavigationHomeToClassicFragment(consola);
+        navController.navigate(action);
     }
 
     private void getListRetroGames() {
@@ -93,7 +92,6 @@ public class HomeFragment extends Fragment{
     }
 
     private void goToDetails(View view) {
-
         Item item = mItems.get(binding.recyclerHome.getChildAdapterPosition(view));
         Integer idUser = item.getIdUser();
         String idItem = item.getIdItem();
