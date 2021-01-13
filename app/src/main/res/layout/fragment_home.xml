@@ -22,8 +22,9 @@
 
         <ImageView
             android:id="@+id/ivAtari"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="@dimen/classic_button_size"
+            android:layout_height="@dimen/classic_button_size"
+            android:onClick="getClassicRetroList"
             android:background="@color/white"
             android:scaleType="centerCrop"
             android:src="@drawable/logoatari" />
@@ -44,8 +45,8 @@
 
         <ImageView
             android:id="@+id/ivSinclair"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="@dimen/classic_button_size"
+            android:layout_height="@dimen/classic_button_size"
             android:background="@color/white"
             android:scaleType="centerCrop"
             android:src="@drawable/logospectrum" />
@@ -66,8 +67,8 @@
 
         <ImageView
             android:id="@+id/ivCommodore"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="@dimen/classic_button_size"
+            android:layout_height="@dimen/classic_button_size"
             android:background="@color/white"
             android:scaleType="centerCrop"
             android:src="@drawable/logocommodore" />
@@ -89,8 +90,8 @@
 
         <ImageView
             android:id="@+id/ivMsx"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="@dimen/classic_button_size"
+            android:layout_height="@dimen/classic_button_size"
             android:background="@color/white"
             android:scaleType="centerCrop"
             android:src="@drawable/logomsx" />

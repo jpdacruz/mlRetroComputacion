@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,7 +24,7 @@ import com.example.mlretrocomputacion.databinding.FragmentHomeBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment{
 
     //vars
     private static final String TAG = "HomeFragment";
@@ -59,13 +60,32 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        setAdapter();
+        setListener();
+        getListRetroGames();
+    }
+
+    private void setAdapter() {
         mItems = new ArrayList<>();
         binding.recyclerHome.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new HomeAdapter(mItems, getContext());
         binding.recyclerHome.setAdapter(adapter);
+    }
 
+    private void setListener() {
         adapter.setOnClickListener(view1 -> goToDetails(view1));
+        binding.ivAtari.setOnClickListener(v -> getClassicList("atari"));
+        binding.ivCommodore.setOnClickListener(v -> getClassicList("commodore"));
+        binding.ivSinclair.setOnClickListener(v -> getClassicList("sinclair"));
+        binding.ivMsx.setOnClickListener(v -> getClassicList("msx"));
+    }
 
+    private void getClassicList(String searchQuery) {
+        
+
+    }
+
+    private void getListRetroGames() {
         homeViewModel.getListRetroCategory().observe(getViewLifecycleOwner(), items -> {
             mItems = items;
             adapter.setData(mItems);
@@ -73,6 +93,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void goToDetails(View view) {
+
         Item item = mItems.get(binding.recyclerHome.getChildAdapterPosition(view));
         Integer idUser = item.getIdUser();
         String idItem = item.getIdItem();
