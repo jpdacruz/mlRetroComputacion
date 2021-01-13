@@ -17,14 +17,8 @@ public class HomeViewModel extends ViewModel {
         repository = new Repository();
     }
 
-    public MutableLiveData<List<Item>> getListRetroCategory() {
-        mRetroCategoryList = repository.getListRetroCategory();
+    public MutableLiveData<List<Item>> getListRetroCategory(String consola) {
+        mRetroCategoryList = repository.getListRetroCategory(consola);
         return mRetroCategoryList;
     }
-
-    public MutableLiveData<List<Item>> getListRetroClassic(String consola) {
-        mRetroCategoryList = repository.getListRetroClassic(consola);
-        return mRetroCategoryList;
-    }
-
 }

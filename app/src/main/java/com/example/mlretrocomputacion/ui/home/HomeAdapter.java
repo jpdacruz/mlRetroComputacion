@@ -19,6 +19,7 @@ import java.util.List;
 
 import static com.example.mlretrocomputacion.R.color.reputation_green;
 import static com.example.mlretrocomputacion.R.color.reputation_light_green;
+import static com.example.mlretrocomputacion.R.color.reputation_no;
 import static com.example.mlretrocomputacion.R.color.reputation_orange;
 import static com.example.mlretrocomputacion.R.color.reputation_red;
 import static com.example.mlretrocomputacion.R.color.reputation_yellow;
@@ -51,10 +52,13 @@ public class HomeAdapter
         Item item = items.get(position);
         holder.tvItemTitle.setText(item.getItemTitle());
         holder.tvItemPrice.setText(String.format("$ %s", item.getItemPrice()));
-        holder.tvLevelReputation.setText(String.format("Reputacion  %s", item.getLevel_reputation()));
+        holder.tvLevelReputation.setText(String.format("Reputacion %s", item.getLevel_reputation()));
 
         String color = item.getColor_reputacion();
         switch (color){
+            case "grey":
+                holder.tvLevelReputation.setTextColor(ContextCompat.getColor(context,reputation_no));
+                break;
             case "green":
                 holder.tvLevelReputation.setTextColor(ContextCompat.getColor(context,reputation_green));
                 break;
@@ -101,7 +105,6 @@ public class HomeAdapter
         notifyDataSetChanged();
     }
 
-    //get clicked city
     //todo: revisar cambiar getItemTitle
     public String getItem(int position){
         return items.get(position).getItemTitle();

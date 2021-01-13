@@ -85,7 +85,7 @@ public class HomeFragment extends Fragment{
     }
 
     private void getListRetroGames() {
-        homeViewModel.getListRetroCategory().observe(getViewLifecycleOwner(), items -> {
+        homeViewModel.getListRetroCategory("all").observe(getViewLifecycleOwner(), items -> {
             mItems = items;
             adapter.setData(mItems);
         });
