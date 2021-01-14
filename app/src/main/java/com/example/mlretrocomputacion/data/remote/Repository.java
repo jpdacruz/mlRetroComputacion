@@ -53,11 +53,10 @@ public class Repository {
                         item.setItemPrice(response.body().getResults().get(i).getPrice());
                         item.setThumbnail(response.body().getResults().get(i).getThumbnail());
 
+                        String full_reputation;
+                        String number_reputation;
+                        String color_reputation;
                         try{
-                            String full_reputation;
-                            String number_reputation;
-                            String color_reputation;
-
                             full_reputation = response.body().getResults().get(i).getSeller().getSellerReputation().getLevelId();
                             if (full_reputation != null){
                                 String[] parts = full_reputation.split("_");

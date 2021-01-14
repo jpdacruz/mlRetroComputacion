@@ -6,19 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:elevation="10dp"
         app:cardCornerRadius="8dp"
         app:layout_constraintEnd_toStartOf="@+id/cardView4"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/searchView">
 
         <ImageView
             android:id="@+id/ivAtari"
@@ -34,21 +44,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:layout_marginTop="8dp"
         android:elevation="10dp"
         app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView2"
         app:layout_constraintEnd_toStartOf="@+id/cardView5"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/cardView2"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@+id/cardView2">
 
         <ImageView
-            android:id="@+id/ivSinclair"
+            android:id="@+id/ivSnes"
             android:layout_width="@dimen/classic_button_size"
             android:layout_height="@dimen/classic_button_size"
             android:background="@color/white"
             android:scaleType="centerCrop"
-            android:src="@drawable/logospectrum" />
+            android:src="@drawable/snes_logo" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -56,21 +66,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:layout_marginTop="8dp"
         android:elevation="10dp"
         app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView4"
         app:layout_constraintEnd_toStartOf="@+id/cardView6"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/cardView4"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@+id/cardView4">
 
         <ImageView
-            android:id="@+id/ivCommodore"
+            android:id="@+id/ivps1"
             android:layout_width="@dimen/classic_button_size"
             android:layout_height="@dimen/classic_button_size"
             android:background="@color/white"
             android:scaleType="centerCrop"
-            android:src="@drawable/logocommodore" />
+            android:src="@drawable/ps1logo" />
     </androidx.cardview.widget.CardView>
 
 
@@ -79,21 +89,43 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:layout_marginTop="8dp"
         android:elevation="10dp"
         app:cardCornerRadius="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView5"
+        app:layout_constraintEnd_toStartOf="@+id/cardView7"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/cardView5"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@+id/cardView5">
 
         <ImageView
-            android:id="@+id/ivMsx"
+            android:id="@+id/ivSega"
             android:layout_width="@dimen/classic_button_size"
             android:layout_height="@dimen/classic_button_size"
             android:background="@color/white"
             android:scaleType="centerCrop"
-            android:src="@drawable/logomsx" />
+            android:src="@drawable/segalogo" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:elevation="10dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/cardView6"
+        app:layout_constraintTop_toTopOf="@+id/cardView6">
+
+        <ImageView
+            android:id="@+id/ivn64"
+            android:layout_width="@dimen/classic_button_size"
+            android:layout_height="@dimen/classic_button_size"
+            android:background="@color/white"
+            android:scaleType="centerCrop"
+            android:src="@drawable/n64logo" />
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView

@@ -73,9 +73,10 @@ public class HomeFragment extends Fragment{
 
         adapter.setOnClickListener(view -> goToDetails(view));
         binding.ivAtari.setOnClickListener(v -> goToClassicList(v, "atari"));
-        binding.ivCommodore.setOnClickListener(v -> goToClassicList(v, "commodore"));
-        binding.ivSinclair.setOnClickListener(v -> goToClassicList(v, "sinclair"));
-        binding.ivMsx.setOnClickListener(v -> goToClassicList(v, "msx"));
+        binding.ivps1.setOnClickListener(v -> goToClassicList(v, "ps1"));
+        binding.ivSega.setOnClickListener(v -> goToClassicList(v, "genesis"));
+        binding.ivSnes.setOnClickListener(v -> goToClassicList(v, "snes"));
+        binding.ivn64.setOnClickListener(v -> goToClassicList(v, "nintendo64"));
     }
 
     private void goToClassicList(View v, String consola) {
