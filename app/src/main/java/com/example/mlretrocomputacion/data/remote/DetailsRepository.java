@@ -1,7 +1,9 @@
 package com.example.mlretrocomputacion.data.remote;
 
 import android.util.Log;
+import android.widget.Toast;
 
+import com.example.mlretrocomputacion.MyApp;
 import com.example.mlretrocomputacion.data.Model.DetailModel;
 import com.example.mlretrocomputacion.data.Model.QuestionModel;
 import com.example.mlretrocomputacion.data.Model.UserModel;
@@ -64,7 +66,6 @@ public class DetailsRepository implements DetailsInterface.repository {
 
             @Override
             public void onFailure(Call<DetailModel> call, Throwable t) {
-
                 Log.i(TAG, "onFailure: " + t.toString());
             }
         });
@@ -119,20 +120,20 @@ public class DetailsRepository implements DetailsInterface.repository {
             @Override
             public void onResponse(Call<QuestionModel> call, Response<QuestionModel> response) {
 
-                Integer totalQuestions;
-
-                try{
-                    totalQuestions = response.body().getTotal();
-
-                    if (totalQuestions == null){
-                        totalQuestions = 0;
+                Integer totalQuestions = null;
+                int respCode = response.code();
+                if (respCode != 429){
+                    try{
+                      totalQuestions = response.body().getTotal();
+                       Log.i(TAG, "TotalQuestion= " + totalQuestions);
+                    }catch(Exception e){
+                      e.printStackTrace();
+                     Log.e(TAG,e.getMessage());
                     }
-                    presenter.showQuestionResult(totalQuestions);
-
-                }catch(Exception e){
-                    e.printStackTrace();
-                    Log.e(TAG,e.getMessage());
+                }else {
+                    totalQuestions = 99999;
                 }
+                presenter.showQuestionResult(totalQuestions);
             }
 
             @Override

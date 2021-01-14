@@ -91,10 +91,20 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewPictures"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDetailsTitle"
-        tools:listitem="@layout/item_list_pictures"/>
+        tools:listitem="@layout/item_list_pictures" />
+
+    <Button
+        android:id="@+id/buttonWebView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="ver articulo en mercado libre"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

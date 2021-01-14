@@ -1,12 +1,18 @@
 package com.example.mlretrocomputacion.data.Model;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import java.util.List;
+
+import com.example.mlretrocomputacion.MyApp;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 
 public class QuestionModel {
 
+    private static final String TAG = "QuestionModel";
     @SerializedName("total")
     @Expose
     private Integer total;

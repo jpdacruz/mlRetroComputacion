@@ -37,7 +37,7 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
 
     //vars
     private static final String TAG = "DetailFragment";
-    private String idItem, colorReputation, levelReputation;
+    private String idItem, colorReputation, levelReputation, urlItem;
     private Integer idUser;
     private DetailsInterface.presenter presenter;
     private List<String> pictures;
@@ -99,6 +99,19 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
 
     private void setListener() {
         adapter.setOnClickListener(v -> goToDialogImage(v));
+        binding.buttonWebView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToMl(v);
+            }
+        });
+    }
+
+    private void goToMl(View v) {
+        Log.i(TAG, "goToMl: " + urlItem);
+        NavController navController = Navigation.findNavController(v);
+        NavDirections action = DetailFragmentDirections.actionDetailsFragmentToWebViewFragment(urlItem);
+        navController.navigate(action);
     }
 
     @Override
@@ -108,6 +121,7 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
         binding.tvDetailsPrice.setText(String.format("$ %s", price));
         binding.tvDetailsCiudad.setText(String.format("Ciudad: %s", city));
         binding.tvDetailsState.setText(String.format("Provincia: %s", state));
+        urlItem = permalink;
         pictures = mPictures;
         adapter.setData(pictures);
     }
@@ -140,8 +154,11 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
 
     @Override
     public void showQuestionResult(int totalQuestions) {
-
-       binding.tvDetailsNumberQuestions.setText(MessageFormat.format("Preguntas realizadas: {0}", totalQuestions));
+        String totaQuestionString = String.valueOf(totalQuestions);
+        if (totaQuestionString.equals("99999")){
+            totaQuestionString =" sin datos";
+        }
+       binding.tvDetailsNumberQuestions.setText(String.format("Preguntas realizadas: %s", totaQuestionString));
     }
 
     private void goToDialogImage(View view) {
