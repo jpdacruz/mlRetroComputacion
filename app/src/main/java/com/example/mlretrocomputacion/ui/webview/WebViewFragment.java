@@ -1,4 +1,4 @@
-package com.example.mlretrocomputacion;
+package com.example.mlretrocomputacion.ui.webview;
 
 import android.os.Bundle;
 
@@ -9,10 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.example.mlretrocomputacion.databinding.FragmentDetailsBinding;
 import com.example.mlretrocomputacion.databinding.FragmentWebViewBinding;
-import com.example.mlretrocomputacion.ui.detail.DetailFragmentArgs;
 
 public class WebViewFragment extends Fragment {
 
@@ -52,7 +49,6 @@ public class WebViewFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         binding.webViewMl.loadUrl(urlMl);
     }
 }

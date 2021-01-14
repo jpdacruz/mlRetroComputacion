@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.mlretrocomputacion.R;
 import com.example.mlretrocomputacion.data.Model.Item;
 import com.example.mlretrocomputacion.data.mvp.DetailsInterface;
 import com.example.mlretrocomputacion.data.mvp.DetailsPresenter;
@@ -26,6 +28,8 @@ import com.example.mlretrocomputacion.ui.home.HomeFragmentDirections;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import www.sanju.motiontoast.MotionToast;
 
 import static com.example.mlretrocomputacion.R.color.reputation_green;
 import static com.example.mlretrocomputacion.R.color.reputation_light_green;
@@ -173,7 +177,12 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
                 dialogF.setArguments(bundle);
                 dialogF.show(getChildFragmentManager(),TAG);
             }else {
-                Toast.makeText(getContext(), "No hay foto para mostrar", Toast.LENGTH_SHORT).show();
+                MotionToast.Companion.darkToast(getActivity(),"No hay foto para mostrar!",
+                        MotionToast.TOAST_WARNING,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(getActivity(),
+                                R.font.helvetica_regular));
             }
         }catch (Exception e){
             e.printStackTrace();

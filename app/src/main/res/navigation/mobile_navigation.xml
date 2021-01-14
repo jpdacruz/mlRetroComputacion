@@ -64,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/webViewFragment"
-        android:name="com.example.mlretrocomputacion.WebViewFragment"
+        android:name="com.example.mlretrocomputacion.ui.webview.WebViewFragment"
         android:label="fragment_web_view"
         tools:layout="@layout/fragment_web_view" >
         <argument

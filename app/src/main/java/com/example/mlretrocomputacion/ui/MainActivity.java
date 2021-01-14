@@ -1,7 +1,8 @@
-package com.example.mlretrocomputacion;
+package com.example.mlretrocomputacion.ui;
 
 import android.os.Bundle;
 
+import com.example.mlretrocomputacion.R;
 import com.example.mlretrocomputacion.data.remote.Repository;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
