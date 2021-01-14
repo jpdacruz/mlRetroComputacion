@@ -6,20 +6,14 @@ import com.example.mlretrocomputacion.data.Model.DetailModel;
 import com.example.mlretrocomputacion.data.Model.QuestionModel;
 import com.example.mlretrocomputacion.data.Model.UserModel;
 import com.example.mlretrocomputacion.data.mvp.DetailsInterface;
-import com.example.mlretrocomputacion.data.remote.MlApiService;
-import com.example.mlretrocomputacion.data.remote.RetrofitSingleton;
-import com.example.mlretrocomputacion.utils.Constants;
-import com.facebook.stetho.okhttp3.StethoInterceptor;
+import com.example.mlretrocomputacion.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DetailsRepository implements DetailsInterface.repository {
 
@@ -119,7 +113,7 @@ public class DetailsRepository implements DetailsInterface.repository {
     public void getItemQuestions(String idItem) {
 
         Call<QuestionModel> call =
-                RetrofitSingleton.getInstance().getMlApiService().getQuestionItem(idItem,Constants.API_VERSION);
+                RetrofitSingleton.getInstance().getMlApiService().getQuestionItem(idItem, Utils.API_VERSION);
 
         call.enqueue(new Callback<QuestionModel>() {
             @Override

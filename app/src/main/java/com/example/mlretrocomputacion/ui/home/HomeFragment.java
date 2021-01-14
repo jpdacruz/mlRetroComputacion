@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,9 +18,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.mlretrocomputacion.data.Model.Item;
 import com.example.mlretrocomputacion.databinding.FragmentHomeBinding;
+import com.example.mlretrocomputacion.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.internal.Util;
 
 public class HomeFragment extends Fragment{
 
@@ -77,6 +81,14 @@ public class HomeFragment extends Fragment{
         binding.ivSega.setOnClickListener(v -> goToClassicList(v, "genesis"));
         binding.ivSnes.setOnClickListener(v -> goToClassicList(v, "snes"));
         binding.ivn64.setOnClickListener(v -> goToClassicList(v, "nintendo64"));
+        binding.buttonSearch.setOnClickListener(v -> {
+            String consola = binding.editTextSearch.getText().toString();
+            if (Utils.validarName(consola)){
+                goToClassicList(v, consola);
+            }else{
+                Toast.makeText(getContext(), "Ingrese un texto a buscar", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void goToClassicList(View v, String consola) {

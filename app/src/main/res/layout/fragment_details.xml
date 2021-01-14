@@ -88,14 +88,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDetailsPrice" />
 
-    <Button
-        android:id="@+id/btnDetailsLink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="continuar a la pagina"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDetailsCiudad" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewPictures"
         android:layout_width="match_parent"

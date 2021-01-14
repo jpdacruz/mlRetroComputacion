@@ -47,7 +47,6 @@ public class ClassicFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mConsola = ClassicFragmentArgs.fromBundle(getArguments()).getConsola();
-            Toast.makeText(getContext(), mConsola, Toast.LENGTH_SHORT).show();
         }
     }
 

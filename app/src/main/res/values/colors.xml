@@ -8,10 +8,14 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="accent">#FFBB86FC</color>
+
     <color name="reputation_no">#655b5b</color>
     <color name="reputation_red">#ff0000</color>
     <color name="reputation_orange">#ff8000</color>
     <color name="reputation_yellow">#FFBF00</color>
     <color name="reputation_light_green">#1fc600</color>
     <color name="reputation_green">#0a5d00</color>
+
+    <color name="search_text">#999999</color>
 </resources>

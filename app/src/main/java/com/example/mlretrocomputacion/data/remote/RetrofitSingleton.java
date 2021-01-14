@@ -1,6 +1,6 @@
 package com.example.mlretrocomputacion.data.remote;
 
-import com.example.mlretrocomputacion.utils.Constants;
+import com.example.mlretrocomputacion.utils.Utils;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 
 import okhttp3.OkHttpClient;
@@ -21,7 +21,7 @@ public class RetrofitSingleton {
                 .build();
 
         retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.URL_BASE)
+                .baseUrl(Utils.URL_BASE)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
