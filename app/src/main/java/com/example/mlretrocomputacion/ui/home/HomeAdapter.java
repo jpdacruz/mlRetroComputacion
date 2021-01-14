@@ -55,9 +55,11 @@ public class HomeAdapter
         holder.tvLevelReputation.setText(String.format("Reputacion %s", item.getLevel_reputation()));
 
         String color = item.getColor_reputacion();
-        if (color ==null){
+
+        if (color ==null || color.equals("")){
             color = "grey";
         }
+
         switch (color){
             case "grey":
                 holder.tvLevelReputation.setTextColor(ContextCompat.getColor(context,reputation_no));

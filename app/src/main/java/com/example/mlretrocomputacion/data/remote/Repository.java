@@ -1,9 +1,11 @@
 package com.example.mlretrocomputacion.data.remote;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.mlretrocomputacion.MyApp;
 import com.example.mlretrocomputacion.data.Model.Item;
 import com.example.mlretrocomputacion.data.Model.ItemResponse;
 
@@ -41,7 +43,6 @@ public class Repository {
             @Override
             public void onResponse(Call<ItemResponse> call, Response<ItemResponse> response) {
 
-                try{
                     for (int i=0; i< response.body().getResults().size(); i++){
                         Item item = new Item();
                         item.setIdItem(response.body().getResults().get(i).getId());
@@ -50,37 +51,22 @@ public class Repository {
                         item.setItemPrice(response.body().getResults().get(i).getPrice());
                         item.setThumbnail(response.body().getResults().get(i).getThumbnail());
 
-                        String full_reputation;
-                        String number_reputation;
-                        String color_reputation;
                         try{
-                            full_reputation = response.body().getResults().get(i).getSeller().getSellerReputation().getLevelId();
-                            if (full_reputation == null || full_reputation.equals("")){
-                                item.setLevel_reputation("nueva");
-                                item.setColor_reputacion("grey");
-                            }else{
-                                String[] parts = full_reputation.split("_");
-                                number_reputation = parts[0];
-                                color_reputation = parts[1];
-                                item.setLevel_reputation(number_reputation);
-                                item.setColor_reputacion(color_reputation);
-
-                            }
+                            String full_reputation = response.body().getResults().get(i).getSeller().getSellerReputation().getLevelId();
+                            String[] parts = full_reputation.split("_");
+                            String number_reputation = parts[0];
+                            String color_reputation = parts[1];
+                            item.setLevel_reputation(number_reputation);
+                            item.setColor_reputacion(color_reputation);
 
                         }catch (Exception e){
                             e.printStackTrace();
+                            item.setLevel_reputation("nueva");
+                            item.setColor_reputacion("grey");
                             Log.e(TAG, e.getMessage());
                         }
-
                         listItem.add(item);
                     }
-
-                }catch (Exception e){
-                    e.printStackTrace();
-                    Log.e(TAG, e.getMessage());
-                }
-
-
                 mutableList.setValue(listItem);
             }
             @Override

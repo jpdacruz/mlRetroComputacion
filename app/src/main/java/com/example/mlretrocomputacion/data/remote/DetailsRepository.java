@@ -46,16 +46,10 @@ public class DetailsRepository implements DetailsInterface.repository {
                     String state = response.body().getSellerAddress().getState().getName();
                     String permalink = response.body().getPermalink();
 
-                    try{
-                        for (int i=0; i<response.body().getPictures().size(); i++){
-                            String picture = response.body().getPictures().get(i).getUrl();
-                            pictures.add(picture);
-                        }
-                    }catch (Exception e){
-                        e.printStackTrace();
-                        Log.e(TAG, e.getMessage());
+                    for (int i=0; i<response.body().getPictures().size(); i++){
+                        String picture = response.body().getPictures().get(i).getUrl();
+                        pictures.add(picture);
                     }
-
                     presenter.showItemResult(title,condition,price,city,state,permalink,pictures);
 
                 }catch (Exception e) {

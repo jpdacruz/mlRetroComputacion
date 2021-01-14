@@ -31,8 +31,10 @@ import java.util.List;
 
 import www.sanju.motiontoast.MotionToast;
 
+import static com.example.mlretrocomputacion.R.color.notification_action_color_filter;
 import static com.example.mlretrocomputacion.R.color.reputation_green;
 import static com.example.mlretrocomputacion.R.color.reputation_light_green;
+import static com.example.mlretrocomputacion.R.color.reputation_no;
 import static com.example.mlretrocomputacion.R.color.reputation_orange;
 import static com.example.mlretrocomputacion.R.color.reputation_red;
 import static com.example.mlretrocomputacion.R.color.reputation_yellow;
@@ -135,9 +137,18 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
         binding.tvDetailsUsuario.setText(String.format("Nick usuario: %s", usuario));
         binding.tvDetailsYearRegister.setText(String.format("Usuario desde el año: %s", registerSince));
         binding.tvDetailsSales.setText(MessageFormat.format("Ventas totales: {0}", transactions));
-        binding.tvDetailsReputacion.setText(String.format("Reputacion: %s", levelReputation));
+
+        if (levelReputation.equals("noreputation")){
+            binding.tvDetailsReputacion.setText("Sin reputacion");
+        }else{
+            binding.tvDetailsReputacion.setText(String.format("Reputacion: %s", levelReputation));
+        }
+
         String color = colorReputation;
         switch (color){
+            case "grey":
+                binding.tvDetailsReputacion.setTextColor(ContextCompat.getColor(getContext(),reputation_no));
+                break;
             case "green":
                 binding.tvDetailsReputacion.setTextColor(ContextCompat.getColor(getContext(),reputation_green));
                 break;
@@ -167,26 +178,21 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
 
     private void goToDialogImage(View view) {
 
-        try{
-            String picture = pictures.get(binding.recyclerViewPictures.getChildAdapterPosition(view));
-            Log.i(TAG, "PICTURE: " + picture);
-            if (picture != null){
-                DialogDetailFragment dialogF = new DialogDetailFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("picture", picture);
-                dialogF.setArguments(bundle);
-                dialogF.show(getChildFragmentManager(),TAG);
-            }else {
-                MotionToast.Companion.darkToast(getActivity(),"No hay foto para mostrar!",
-                        MotionToast.TOAST_WARNING,
-                        MotionToast.GRAVITY_BOTTOM,
-                        MotionToast.LONG_DURATION,
-                        ResourcesCompat.getFont(getActivity(),
-                                R.font.helvetica_regular));
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-            Log.d(TAG, "goToDialogImage: " + e.getMessage());
+        String picture = pictures.get(binding.recyclerViewPictures.getChildAdapterPosition(view));
+        Log.i(TAG, "PICTURE: " + picture);
+        if (picture != null){
+            DialogDetailFragment dialogF = new DialogDetailFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("picture", picture);
+            dialogF.setArguments(bundle);
+            dialogF.show(getChildFragmentManager(),TAG);
+        }else {
+            MotionToast.Companion.darkToast(getActivity(),"No hay foto para mostrar!",
+                    MotionToast.TOAST_WARNING,
+                    MotionToast.GRAVITY_BOTTOM,
+                    MotionToast.LONG_DURATION,
+                    ResourcesCompat.getFont(getActivity(),
+                            R.font.helvetica_regular));
         }
     }
 }

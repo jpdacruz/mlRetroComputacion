@@ -100,6 +100,12 @@ public class ClassicFragment extends Fragment {
         String colorReputation = item.getColor_reputacion();
         String levelReputation = item.getLevel_reputation();
 
+        if (colorReputation == null){
+            colorReputation = "grey";
+        }
+        if (levelReputation == null){
+            levelReputation = "noreputation";
+        }
         Log.i(TAG, "goToDetailsFav: " + idItem + " " + idUser + " " + colorReputation + " " + levelReputation);
 
         NavController navController = Navigation.findNavController(view);
