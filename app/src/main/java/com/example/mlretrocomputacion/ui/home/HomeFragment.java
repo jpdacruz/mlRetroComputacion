@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -16,6 +17,7 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.mlretrocomputacion.R;
 import com.example.mlretrocomputacion.data.Model.Item;
 import com.example.mlretrocomputacion.databinding.FragmentHomeBinding;
 import com.example.mlretrocomputacion.utils.Utils;
@@ -24,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.internal.Util;
+import www.sanju.motiontoast.MotionToast;
 
 public class HomeFragment extends Fragment{
 
@@ -86,7 +89,12 @@ public class HomeFragment extends Fragment{
             if (Utils.validarName(consola)){
                 goToClassicList(v, consola);
             }else{
-                Toast.makeText(getContext(), "Ingrese un texto a buscar", Toast.LENGTH_LONG).show();
+                MotionToast.Companion.darkToast(getActivity(),"Ingrese lo que está buscando",
+                        MotionToast.TOAST_WARNING,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(getActivity(),
+                                R.font.helvetica_regular));
             }
         });
     }
