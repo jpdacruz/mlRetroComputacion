@@ -55,15 +55,16 @@ public class Repository {
                         String color_reputation;
                         try{
                             full_reputation = response.body().getResults().get(i).getSeller().getSellerReputation().getLevelId();
-                            if (full_reputation != null){
+                            if (full_reputation == null || full_reputation.equals("")){
+                                item.setLevel_reputation("nueva");
+                                item.setColor_reputacion("grey");
+                            }else{
                                 String[] parts = full_reputation.split("_");
                                 number_reputation = parts[0];
                                 color_reputation = parts[1];
                                 item.setLevel_reputation(number_reputation);
                                 item.setColor_reputacion(color_reputation);
-                            }else{
-                                item.setLevel_reputation("nueva");
-                                item.setColor_reputacion("grey");
+
                             }
 
                         }catch (Exception e){

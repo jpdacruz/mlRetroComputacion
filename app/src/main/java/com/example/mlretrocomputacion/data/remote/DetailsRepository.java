@@ -86,11 +86,11 @@ public class DetailsRepository implements DetailsInterface.repository {
                     String registerSince;
                     registerSinceFull = response.body().getRegistrationDate();
 
-                    if(registerSinceFull != null){
+                    if(registerSinceFull == null || registerSinceFull.equals("")){
+                        registerSince = "sin datos";
+                    }else {
                         String[] parts = registerSinceFull.split("-");
                         registerSince = parts[0];
-                    }else {
-                        registerSince = "sin datos";
                     }
 
                     Integer transactions = response.body().getSellerReputation().getTransactions().getTotal();
