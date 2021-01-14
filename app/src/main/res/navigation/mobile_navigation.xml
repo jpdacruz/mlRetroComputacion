@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.mlretrocomputacion.ui.detail.DetailFragment"
-        android:label="fragment_details"
+        android:label="Detalles"
         tools:layout="@layout/fragment_details" >
         <argument
             android:name="idUser"
@@ -42,7 +42,7 @@
     <fragment
         android:id="@+id/classicFragment"
         android:name="com.example.mlretrocomputacion.ui.classic.ClassicFragment"
-        android:label="fragment_classic"
+        android:label="Clasicos"
         tools:layout="@layout/fragment_classic" >
         <argument
             android:name="consola"
@@ -54,7 +54,7 @@
     <fragment
         android:id="@+id/webViewFragment"
         android:name="com.example.mlretrocomputacion.ui.webview.WebViewFragment"
-        android:label="fragment_web_view"
+        android:label="Navega en ml"
         tools:layout="@layout/fragment_web_view" >
         <argument
             android:name="url"

@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebViewClient;
+
 import com.example.mlretrocomputacion.databinding.FragmentWebViewBinding;
 
 public class WebViewFragment extends Fragment {
@@ -49,6 +51,7 @@ public class WebViewFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        binding.webViewMl.setWebViewClient(new WebViewClient());
         binding.webViewMl.loadUrl(urlMl);
     }
 }
