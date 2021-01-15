@@ -89,7 +89,20 @@ public class DetailsRepository implements DetailsInterface.repository {
                     }
 
                     Integer transactions = response.body().getSellerReputation().getTransactions().getTotal();
-                    presenter.showUserResult(usuario,registerSince,transactions);
+
+                    String full_reputation = response.body().getSellerReputation().getLevelId();
+                    String number_reputation;
+                    String color_reputation;
+                    if (full_reputation == null ||full_reputation.equals("")){
+                        color_reputation = "grey";
+                        number_reputation ="no";
+                    }else {
+                        String[] parts = full_reputation.split("_");
+                        number_reputation = parts[0];
+                        color_reputation = parts[1];
+                    }
+                    Log.i(TAG, "Reputacion: " + color_reputation + number_reputation);
+                    presenter.showUserResult(usuario,registerSince,transactions, number_reputation,color_reputation);
 
                 }catch (Exception e){
                     e.printStackTrace();

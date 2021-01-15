@@ -29,12 +29,6 @@
         <argument
             android:name="idItem"
             app:argType="string" />
-        <argument
-            android:name="colorReputation"
-            app:argType="string" />
-        <argument
-            android:name="levelReputation"
-            app:argType="string" />
         <action
             android:id="@+id/action_detailsFragment_to_webViewFragment"
             app:destination="@id/webViewFragment" />

@@ -50,21 +50,6 @@ public class Repository {
                         item.setItemTitle(response.body().getResults().get(i).getTitle());
                         item.setItemPrice(response.body().getResults().get(i).getPrice());
                         item.setThumbnail(response.body().getResults().get(i).getThumbnail());
-
-                        try{
-                            String full_reputation = response.body().getResults().get(i).getSeller().getSellerReputation().getLevelId();
-                            String[] parts = full_reputation.split("_");
-                            String number_reputation = parts[0];
-                            String color_reputation = parts[1];
-                            item.setLevel_reputation(number_reputation);
-                            item.setColor_reputacion(color_reputation);
-
-                        }catch (Exception e){
-                            e.printStackTrace();
-                            item.setLevel_reputation("nueva");
-                            item.setColor_reputacion("grey");
-                            Log.e(TAG, e.getMessage());
-                        }
                         listItem.add(item);
                     }
                 mutableList.setValue(listItem);

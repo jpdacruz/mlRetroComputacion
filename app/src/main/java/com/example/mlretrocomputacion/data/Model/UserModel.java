@@ -182,27 +182,27 @@ public class UserModel {
 
         @SerializedName("level_id")
         @Expose
-        private Object levelId;
+        private String levelId;
         @SerializedName("power_seller_status")
         @Expose
-        private Object powerSellerStatus;
+        private String powerSellerStatus;
         @SerializedName("transactions")
         @Expose
         private Transactions transactions;
 
-        public Object getLevelId() {
+        public String getLevelId() {
             return levelId;
         }
 
-        public void setLevelId(Object levelId) {
+        public void setLevelId(String levelId) {
             this.levelId = levelId;
         }
 
-        public Object getPowerSellerStatus() {
+        public String getPowerSellerStatus() {
             return powerSellerStatus;
         }
 
-        public void setPowerSellerStatus(Object powerSellerStatus) {
+        public void setPowerSellerStatus(String powerSellerStatus) {
             this.powerSellerStatus = powerSellerStatus;
         }
 

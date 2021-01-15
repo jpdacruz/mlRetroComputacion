@@ -23,9 +23,9 @@ public class DetailsPresenter implements DetailsInterface.presenter {
     }
 
     @Override
-    public void showUserResult(String usuario, String registerSince, Integer transactions) {
+    public void showUserResult(String usuario, String registerSince, Integer transactions, String number_reputation, String color_reputation) {
         if (view!=null){
-            view.showUserResult(usuario,registerSince,transactions);
+            view.showUserResult(usuario,registerSince,transactions, number_reputation,color_reputation);
         }
     }
 

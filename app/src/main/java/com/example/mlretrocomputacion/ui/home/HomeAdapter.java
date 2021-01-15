@@ -52,34 +52,6 @@ public class HomeAdapter
         Item item = items.get(position);
         holder.tvItemTitle.setText(item.getItemTitle());
         holder.tvItemPrice.setText(String.format("$ %s", item.getItemPrice()));
-        holder.tvLevelReputation.setText(String.format("Reputacion %s", item.getLevel_reputation()));
-
-        String color = item.getColor_reputacion();
-
-        if (color ==null || color.equals("")){
-            color = "grey";
-        }
-
-        switch (color){
-            case "grey":
-                holder.tvLevelReputation.setTextColor(ContextCompat.getColor(context,reputation_no));
-                break;
-            case "green":
-                holder.tvLevelReputation.setTextColor(ContextCompat.getColor(context,reputation_green));
-                break;
-            case "light":
-                holder.tvLevelReputation.setTextColor(ContextCompat.getColor(context, reputation_light_green));
-                break;
-            case "yellow":
-                holder.tvLevelReputation.setTextColor(ContextCompat.getColor(context, reputation_yellow));
-                break;
-            case "orange":
-                holder.tvLevelReputation.setTextColor(ContextCompat.getColor(context,reputation_orange));
-                break;
-            case "red":
-                holder.tvLevelReputation.setTextColor(ContextCompat.getColor(context,reputation_red));
-                break;
-        }
 
         Glide.with(context).load(item.getThumbnail()).into(holder.ivTumbnail);
     }
@@ -117,14 +89,13 @@ public class HomeAdapter
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tvItemTitle, tvItemPrice, tvLevelReputation;
+        private TextView tvItemTitle, tvItemPrice;
         private ImageView ivTumbnail;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvItemTitle = itemView.findViewById(R.id.tvItemTitleHome);
             tvItemPrice = itemView.findViewById(R.id.tvItemPriceHome);
-            tvLevelReputation = itemView.findViewById(R.id.tvLevelReputation);
             ivTumbnail = itemView.findViewById(R.id.ivItemTumbHome);
         }
     }

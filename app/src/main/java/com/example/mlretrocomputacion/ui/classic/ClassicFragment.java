@@ -97,19 +97,11 @@ public class ClassicFragment extends Fragment {
         Item item = mItems.get(binding.recyclerClassic.getChildAdapterPosition(view));
         Integer idUser = item.getIdUser();
         String idItem = item.getIdItem();
-        String colorReputation = item.getColor_reputacion();
-        String levelReputation = item.getLevel_reputation();
 
-        if (colorReputation == null){
-            colorReputation = "grey";
-        }
-        if (levelReputation == null){
-            levelReputation = "noreputation";
-        }
-        Log.i(TAG, "goToDetailsFav: " + idItem + " " + idUser + " " + colorReputation + " " + levelReputation);
+        Log.i(TAG, "goToDetailsFav: " + idItem + " " + idUser);
 
         NavController navController = Navigation.findNavController(view);
-        NavDirections action = ClassicFragmentDirections.actionClassicFragmentToDetailsFragment(idUser,idItem, colorReputation, levelReputation);
+        NavDirections action = ClassicFragmentDirections.actionClassicFragmentToDetailsFragment(idUser,idItem);
         navController.navigate(action);
     }
 

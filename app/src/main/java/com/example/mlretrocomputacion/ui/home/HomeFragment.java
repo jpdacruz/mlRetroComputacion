@@ -116,13 +116,11 @@ public class HomeFragment extends Fragment{
         Item item = mItems.get(binding.recyclerHome.getChildAdapterPosition(view));
         Integer idUser = item.getIdUser();
         String idItem = item.getIdItem();
-        String colorReputation = item.getColor_reputacion();
-        String levelReputation = item.getLevel_reputation();
 
-        Log.i(TAG, "goToDetailsFav: " + idItem + " " + idUser + " " + colorReputation + " " + levelReputation);
+        Log.i(TAG, "goToDetailsFav: " + idItem + " " + idUser);
 
         NavController navController = Navigation.findNavController(view);
-        NavDirections action = HomeFragmentDirections.actionNavigationHomeToDetailsFragment(idUser,idItem, colorReputation, levelReputation);
+        NavDirections action = HomeFragmentDirections.actionNavigationHomeToDetailsFragment(idUser,idItem);
         navController.navigate(action);
     }
 }

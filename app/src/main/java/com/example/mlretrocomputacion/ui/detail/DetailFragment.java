@@ -43,7 +43,7 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
 
     //vars
     private static final String TAG = "DetailFragment";
-    private String idItem, colorReputation, levelReputation, urlItem;
+    private String idItem,urlItem;
     private Integer idUser;
     private DetailsInterface.presenter presenter;
     private List<String> pictures;
@@ -61,8 +61,6 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
         if (getArguments() != null) {
             idItem = DetailFragmentArgs.fromBundle(getArguments()).getIdItem();
             idUser = DetailFragmentArgs.fromBundle(getArguments()).getIdUser();
-            colorReputation = DetailFragmentArgs.fromBundle(getArguments()).getColorReputation();
-            levelReputation = DetailFragmentArgs.fromBundle(getArguments()).getLevelReputation();
         }
     }
 
@@ -133,19 +131,18 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
     }
 
     @Override
-    public void showUserResult(String usuario, String registerSince, Integer transactions) {
+    public void showUserResult(String usuario, String registerSince, Integer transactions, String number_reputation, String color_reputation) {
         binding.tvDetailsUsuario.setText(String.format("Nick usuario: %s", usuario));
         binding.tvDetailsYearRegister.setText(String.format("Usuario desde el año: %s", registerSince));
         binding.tvDetailsSales.setText(MessageFormat.format("Ventas totales: {0}", transactions));
 
-        if (levelReputation.equals("noreputation")){
+        if (number_reputation.equals("no")){
             binding.tvDetailsReputacion.setText("Sin reputacion");
         }else{
-            binding.tvDetailsReputacion.setText(String.format("Reputacion: %s", levelReputation));
+            binding.tvDetailsReputacion.setText(String.format("Reputacion: %s", number_reputation));
         }
 
-        String color = colorReputation;
-        switch (color){
+        switch (color_reputation){
             case "grey":
                 binding.tvDetailsReputacion.setTextColor(ContextCompat.getColor(getContext(),reputation_no));
                 break;
