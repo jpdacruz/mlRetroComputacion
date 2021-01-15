@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -25,9 +26,12 @@ import com.example.mlretrocomputacion.ui.detail.DialogDetailFragment;
 import com.example.mlretrocomputacion.ui.home.HomeAdapter;
 import com.example.mlretrocomputacion.ui.home.HomeFragmentDirections;
 import com.example.mlretrocomputacion.ui.home.HomeViewModel;
+import com.example.mlretrocomputacion.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import www.sanju.motiontoast.MotionToast;
 
 public class ClassicFragment extends Fragment {
 

@@ -1,5 +1,6 @@
 package com.example.mlretrocomputacion.ui.home;
 
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -66,6 +67,7 @@ public class HomeFragment extends Fragment{
 
         setAdapter();
         setListener();
+
         getListRetroGames();
     }
 

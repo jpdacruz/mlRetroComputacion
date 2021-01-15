@@ -24,6 +24,7 @@ import com.example.mlretrocomputacion.data.mvp.DetailsInterface;
 import com.example.mlretrocomputacion.data.mvp.DetailsPresenter;
 import com.example.mlretrocomputacion.databinding.FragmentDetailsBinding;
 import com.example.mlretrocomputacion.ui.home.HomeFragmentDirections;
+import com.example.mlretrocomputacion.utils.Utils;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -82,12 +83,11 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //call the presenter
-
+        presenter = new DetailsPresenter(this);
         pictures = new ArrayList<>();
         setAdapter();
         setListener();
 
-        presenter = new DetailsPresenter(this);
         presenter.getItemDetails(idItem);
         presenter.getUserDetails(idUser);
         presenter.getItemQuestions(idItem);

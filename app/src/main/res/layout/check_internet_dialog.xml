@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="200dp"
+    android:layout_height="300dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/purple_200"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:tint="@color/purple_700"
+        android:src="@drawable/ic_nowifi"
+        android:layout_gravity="center">
+    </ImageView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OOPS!"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:textColor="@color/purple_700"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sin conexión a internet"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:textColor="@color/purple_700"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Por favor, chequea tu conexión"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:textColor="@color/purple_700"/>
+
+    <Button
+        android:id="@+id/buttonRetry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:textAllCaps="true"
+        android:background="@drawable/button_shape"
+        android:text="reintentar"
+        />
+
+</LinearLayout>

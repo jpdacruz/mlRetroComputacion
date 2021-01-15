@@ -1,4 +1,4 @@
-package com.example.mlretrocomputacion.data.remote;
+package com.example.mlretrocomputacion.data.mvp;
 
 import android.util.Log;
 import android.widget.Toast;
@@ -8,6 +8,7 @@ import com.example.mlretrocomputacion.data.Model.DetailModel;
 import com.example.mlretrocomputacion.data.Model.QuestionModel;
 import com.example.mlretrocomputacion.data.Model.UserModel;
 import com.example.mlretrocomputacion.data.mvp.DetailsInterface;
+import com.example.mlretrocomputacion.data.remote.RetrofitSingleton;
 import com.example.mlretrocomputacion.utils.Utils;
 
 import java.util.ArrayList;
@@ -54,13 +55,13 @@ public class DetailsRepository implements DetailsInterface.repository {
 
                 }catch (Exception e) {
                     e.printStackTrace();
-                    Log.e(TAG, e.getMessage());
+                    Log.e(TAG, "Error parsing DetailModel" + e.getMessage());
                 }
             }
 
             @Override
             public void onFailure(Call<DetailModel> call, Throwable t) {
-                Log.i(TAG, "onFailure: " + t.toString());
+                Log.i(TAG, "Error Call ItemDetail: " + t.toString());
             }
         });
     }
@@ -106,13 +107,13 @@ public class DetailsRepository implements DetailsInterface.repository {
 
                 }catch (Exception e){
                     e.printStackTrace();
-                    Log.e(TAG,e.getMessage());
+                    Log.e(TAG,"Error parsing UserModel: " + e.getMessage());
                 }
             }
 
             @Override
             public void onFailure(Call<UserModel> call, Throwable t) {
-                Log.i(TAG, "onFailure: " + t.toString());
+                Log.i(TAG, "Error Call UserDetail: " + t.toString());
             }
         });
     }
@@ -135,7 +136,7 @@ public class DetailsRepository implements DetailsInterface.repository {
                        Log.i(TAG, "TotalQuestion= " + totalQuestions);
                     }catch(Exception e){
                       e.printStackTrace();
-                     Log.e(TAG,e.getMessage());
+                     Log.e(TAG,"Error parsing QuestionModel: " + e.getMessage());
                     }
                 }else {
                     totalQuestions = 99999;
@@ -145,7 +146,7 @@ public class DetailsRepository implements DetailsInterface.repository {
 
             @Override
             public void onFailure(Call<QuestionModel> call, Throwable t) {
-                Log.i(TAG, "onFailure: " + t.toString());
+                Log.i(TAG, "Error Call QuestionDetail: " + t.toString());
             }
         });
     }
