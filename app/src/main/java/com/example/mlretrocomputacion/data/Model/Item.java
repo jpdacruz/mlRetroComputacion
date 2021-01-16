@@ -1,22 +1,19 @@
 package com.example.mlretrocomputacion.data.Model;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "itemTable")
 public class Item {
 
+    @PrimaryKey
+    @NonNull
+    private String idItem;
     private String itemTitle;
     private Double itemPrice;
     private String thumbnail;
-    private String level_reputation;
-    private String color_reputacion;
     private Integer idUser;
-    private String idItem;
-
-    public Item(String itemTitle, Double itemPrice,String thumbnail, String level_reputation, String color_reputacion) {
-        this.itemTitle = itemTitle;
-        this.itemPrice = itemPrice;
-        this.thumbnail = thumbnail;
-        this.level_reputation = level_reputation;
-        this.color_reputacion = color_reputacion;
-    }
 
     public Item() {
     }
@@ -43,22 +40,6 @@ public class Item {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
-    }
-
-    public String getLevel_reputation() {
-        return level_reputation;
-    }
-
-    public void setLevel_reputation(String level_reputation) {
-        this.level_reputation = level_reputation;
-    }
-
-    public String getColor_reputacion() {
-        return color_reputacion;
-    }
-
-    public void setColor_reputacion(String color_reputacion) {
-        this.color_reputacion = color_reputacion;
     }
 
     public Integer getIdUser() {
