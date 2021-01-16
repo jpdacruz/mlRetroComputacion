@@ -4,6 +4,9 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -38,9 +41,11 @@ public class HomeFragment extends Fragment{
     //widgets
     FragmentHomeBinding binding;
     private HomeAdapter adapter;
+    View view;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
         }
@@ -51,7 +56,7 @@ public class HomeFragment extends Fragment{
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
+        view = binding.getRoot();
         return view;
     }
 
@@ -69,6 +74,23 @@ public class HomeFragment extends Fragment{
         setListener();
 
         getListRetroGames();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.bottom_nav_menu,menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.tofavorites){
+            NavController navController = Navigation.findNavController(view);
+            NavDirections action = HomeFragmentDirections.actionNavigationHomeToFavoriteFragment();
+            navController.navigate(action);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void setAdapter() {

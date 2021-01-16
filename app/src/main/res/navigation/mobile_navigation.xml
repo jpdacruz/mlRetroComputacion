@@ -16,12 +16,15 @@
         <action
             android:id="@+id/action_navigation_home_to_classicFragment"
             app:destination="@id/classicFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.mlretrocomputacion.ui.detail.DetailFragment"
-        android:label="Detalles"
+        android:label="detalles"
         tools:layout="@layout/fragment_details" >
         <argument
             android:name="idUser"
@@ -36,7 +39,7 @@
     <fragment
         android:id="@+id/classicFragment"
         android:name="com.example.mlretrocomputacion.ui.classic.ClassicFragment"
-        android:label="Clasicos"
+        android:label="clasicos"
         tools:layout="@layout/fragment_classic" >
         <argument
             android:name="consola"
@@ -48,10 +51,15 @@
     <fragment
         android:id="@+id/webViewFragment"
         android:name="com.example.mlretrocomputacion.ui.webview.WebViewFragment"
-        android:label="Navega en ml"
+        android:label="navega en ml"
         tools:layout="@layout/fragment_web_view" >
         <argument
             android:name="url"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.mlretrocomputacion.FavoriteFragment"
+        android:label="favoritos"
+        tools:layout="@layout/fragment_favorite" />
 </navigation>

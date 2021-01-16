@@ -32,6 +32,11 @@ public class MainActivity extends AppCompatActivity {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home)
                 .build();
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.ic_logoicon);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
