@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -23,6 +25,7 @@ import com.example.mlretrocomputacion.data.Model.Item;
 import com.example.mlretrocomputacion.data.mvp.DetailsInterface;
 import com.example.mlretrocomputacion.data.mvp.DetailsPresenter;
 import com.example.mlretrocomputacion.databinding.FragmentDetailsBinding;
+import com.example.mlretrocomputacion.ui.favorite.FavoriteViewModel;
 import com.example.mlretrocomputacion.ui.home.HomeFragmentDirections;
 import com.example.mlretrocomputacion.utils.Utils;
 
@@ -44,10 +47,14 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
 
     //vars
     private static final String TAG = "DetailFragment";
+    private Item item;
     private String idItem,urlItem;
     private Integer idUser;
     private DetailsInterface.presenter presenter;
     private List<String> pictures;
+    private FavoriteViewModel favoriteViewModel;
+    private Boolean isFavorite;
+
     //widgets
     private FragmentDetailsBinding binding;
     private DetailAdapter adapter;
@@ -68,6 +75,8 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        favoriteViewModel =
+                new ViewModelProvider(this).get(FavoriteViewModel.class);
         binding = FragmentDetailsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         return view;
@@ -88,9 +97,24 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
         setAdapter();
         setListener();
 
+        checkIfItemIsFavorite();
+
         presenter.getItemDetails(idItem);
         presenter.getUserDetails(idUser);
         presenter.getItemQuestions(idItem);
+    }
+
+    private void checkIfItemIsFavorite() {
+        favoriteViewModel.getListRetroCategory().observe(getViewLifecycleOwner(), new Observer<List<Item>>() {
+            @Override
+            public void onChanged(List<Item> mItems) {
+                String idItemToInsert = idItem;
+                if (Utils.isItemExist(mItems, idItemToInsert)) {
+                    binding.imageButtonNoFav.setVisibility(View.GONE);
+                    binding.imageButtonFav.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     private void setAdapter() {
@@ -103,12 +127,17 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
 
     private void setListener() {
         adapter.setOnClickListener(v -> goToDialogImage(v));
-        binding.buttonWebView.setOnClickListener(new View.OnClickListener() {
+        binding.imageButtonNoFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToMl(v);
+                insertCityRoom();
             }
         });
+        binding.buttonWebView.setOnClickListener(v -> goToMl(v));
+    }
+
+    private void insertCityRoom() {
+        favoriteViewModel.insertFavItem(item);
     }
 
     private void goToMl(View v) {
@@ -120,6 +149,13 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
 
     @Override
     public void showItemResult(String title, String condition, Double price, String city, String state, String permalink, List<String> mPictures) {
+        item = new Item();
+        item.setItemTitle(title);
+        item.setItemPrice(price);
+        item.setIdItem(idItem);
+        item.setIdUser(idUser);
+        item.setThumbnail(mPictures.get(0));
+
         binding.tvDetailsCondition.setText(String.format("Estado: %s", condition));
         binding.tvDetailsTitle.setText(title);
         binding.tvDetailsPrice.setText(String.format("$ %s", price));
@@ -174,7 +210,6 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
     }
 
     private void goToDialogImage(View view) {
-
         String picture = pictures.get(binding.recyclerViewPictures.getChildAdapterPosition(view));
         Log.i(TAG, "PICTURE: " + picture);
         if (picture != null){

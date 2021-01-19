@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.mlretrocomputacion.MyApp;
 import com.example.mlretrocomputacion.data.Model.Item;
 import com.example.mlretrocomputacion.data.roomdb.asynstask.DeleteAsynctaskRoom;
 import com.example.mlretrocomputacion.data.roomdb.asynstask.InsertAsynctaskRoom;
@@ -15,8 +16,8 @@ public class RoomRepository {
     private ItemDao itemDao;
     private LiveData<List<Item>> listFavItems;
 
-    public RoomRepository(Application application){
-        ItemRoomDatabase db = ItemRoomDatabase.getDatabase(application);
+    public RoomRepository(){
+        ItemRoomDatabase db = ItemRoomDatabase.getDatabase(MyApp.getContext());
         itemDao = db.itemDao();
         listFavItems = itemDao.getFavItems();
     }
@@ -25,11 +26,11 @@ public class RoomRepository {
         return listFavItems;
     }
 
-    public void insertFavCity (Item item){
+    public void insertFavItem (Item item){
         new InsertAsynctaskRoom(itemDao).execute(item);
     }
 
-    public void deleteCityFav (String idItem){
-        new DeleteAsynctaskRoom(itemDao).execute(idItem);
+    public void deleteFavItem (String itemTitle){
+        new DeleteAsynctaskRoom(itemDao).execute(itemTitle);
     }
 }

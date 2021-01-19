@@ -8,6 +8,10 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.example.mlretrocomputacion.data.Model.Item;
+
+import java.util.List;
+
 public class Utils {
 
     public final static String URL_BASE ="https://api.mercadolibre.com/";
@@ -48,5 +52,14 @@ public class Utils {
             }
         }
         return result;
+    }
+
+    public static boolean isItemExist(List<Item> items, String idItem) {
+        for (Item i : items) {
+            if (i.getIdItem().contains(idItem)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

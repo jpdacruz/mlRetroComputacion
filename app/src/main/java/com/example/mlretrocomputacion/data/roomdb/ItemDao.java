@@ -15,8 +15,8 @@ public interface ItemDao {
     @Insert
     void insert(Item item);
 
-    @Query("DELETE FROM itemTable WHERE idItem = :idItem")
-    void deleteById(String idItem);
+    @Query("DELETE FROM itemTable WHERE itemTitle = :itemTitle")
+    void deleteByTitle(String itemTitle);
 
     @Query("SELECT * FROM itemTable ORDER BY itemTitle ASC")
     LiveData<List<Item>> getFavItems();
