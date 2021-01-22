@@ -203,9 +203,11 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
     public void showQuestionResult(int totalQuestions) {
         String totaQuestionString = String.valueOf(totalQuestions);
         if (totaQuestionString.equals("99999")){
-            totaQuestionString =" sin datos";
+            presenter.getItemQuestions(idItem);
+            binding.tvDetailsNumberQuestions.setText("Preguntas realizadas: ");
+        }else{
+            binding.tvDetailsNumberQuestions.setText(String.format("Preguntas realizadas: %s", totaQuestionString));
         }
-       binding.tvDetailsNumberQuestions.setText(String.format("Preguntas realizadas: %s", totaQuestionString));
     }
 
     @Override
