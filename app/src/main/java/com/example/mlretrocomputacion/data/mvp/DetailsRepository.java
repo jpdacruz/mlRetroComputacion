@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import com.example.mlretrocomputacion.MyApp;
 import com.example.mlretrocomputacion.data.Model.DetailModel;
+import com.example.mlretrocomputacion.data.Model.Item;
 import com.example.mlretrocomputacion.data.Model.QuestionModel;
 import com.example.mlretrocomputacion.data.Model.UserModel;
 import com.example.mlretrocomputacion.data.mvp.DetailsInterface;
@@ -147,6 +148,37 @@ public class DetailsRepository implements DetailsInterface.repository {
             @Override
             public void onFailure(Call<QuestionModel> call, Throwable t) {
                 Log.i(TAG, "Error Call QuestionDetail: " + t.toString());
+            }
+        });
+    }
+
+    @Override
+    public void getItemifActive(String idItem,String itemTitle) {
+
+        Call<DetailModel> call =
+                RetrofitSingleton.getInstance().getMlApiService().getDetailItem(idItem);
+
+        call.enqueue(new Callback<DetailModel>() {
+            @Override
+            public void onResponse(Call<DetailModel> call, Response<DetailModel> response) {
+                try{
+                    String status = response.body().getStatus();
+                    Log.i(TAG, "ESTADO PRODUCTOS: " + status);
+                    Boolean isChecked = false;
+                    if (status.equals("active")){
+                        isChecked = true;
+                    }
+                    presenter.showIfItemIsActive(isChecked, itemTitle);
+
+                }catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e(TAG, "Error parsing Itemis checked" + e.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DetailModel> call, Throwable t) {
+                Log.i(TAG, "Error Call ItemDetail: " + t.toString());
             }
         });
     }

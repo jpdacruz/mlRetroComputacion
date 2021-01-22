@@ -46,7 +46,7 @@
                 android:layout_height="100dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/stat_notify_error" />
+                tools:srcCompat="@android:drawable/stat_notify_error" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

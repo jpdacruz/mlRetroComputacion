@@ -1,15 +1,19 @@
 package com.example.mlretrocomputacion.utils;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.widget.Toast;
 
 import com.example.mlretrocomputacion.data.Model.Item;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 public class Utils {

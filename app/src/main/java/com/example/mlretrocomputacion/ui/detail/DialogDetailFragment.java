@@ -14,12 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
 import com.example.mlretrocomputacion.R;
 import com.example.mlretrocomputacion.databinding.FragmentDetailsBinding;
 import com.example.mlretrocomputacion.databinding.FragmentDialogDetailBinding;
+import com.example.mlretrocomputacion.utils.LoadImage;
 
 public class DialogDetailFragment extends DialogFragment {
 
@@ -52,7 +50,7 @@ public class DialogDetailFragment extends DialogFragment {
     private void getImageToShow(View v) {
         pictureUrl = getArguments().getString("picture","");
         ImageView imageView = v.findViewById(R.id.imageViewDialog);
-        Glide.with(getContext()).load(pictureUrl).into(imageView);
+        new LoadImage(imageView).execute(pictureUrl);
     }
 
 

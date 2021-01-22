@@ -1,6 +1,7 @@
 package com.example.mlretrocomputacion.ui.home;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,21 +9,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.mlretrocomputacion.R;
 import com.example.mlretrocomputacion.data.Model.Item;
+import com.example.mlretrocomputacion.utils.LoadImage;
 
 import java.util.List;
-
-import static com.example.mlretrocomputacion.R.color.reputation_green;
-import static com.example.mlretrocomputacion.R.color.reputation_light_green;
-import static com.example.mlretrocomputacion.R.color.reputation_no;
-import static com.example.mlretrocomputacion.R.color.reputation_orange;
-import static com.example.mlretrocomputacion.R.color.reputation_red;
-import static com.example.mlretrocomputacion.R.color.reputation_yellow;
 
 public class HomeAdapter
         extends RecyclerView.Adapter<HomeAdapter.ViewHolder>
@@ -48,12 +41,12 @@ public class HomeAdapter
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
         Item item = items.get(position);
         holder.tvItemTitle.setText(item.getItemTitle());
         holder.tvItemPrice.setText(String.format("$ %s", item.getItemPrice()));
 
-        Glide.with(context).load(item.getThumbnail()).into(holder.ivTumbnail);
+        String url = item.getThumbnail();
+        new LoadImage(holder.ivTumbnail).execute(url);
     }
 
     @Override

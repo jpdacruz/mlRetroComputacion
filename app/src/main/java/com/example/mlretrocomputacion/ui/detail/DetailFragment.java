@@ -53,7 +53,6 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
     private DetailsInterface.presenter presenter;
     private List<String> pictures;
     private FavoriteViewModel favoriteViewModel;
-    private Boolean isFavorite;
 
     //widgets
     private FragmentDetailsBinding binding;
@@ -207,6 +206,11 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
             totaQuestionString =" sin datos";
         }
        binding.tvDetailsNumberQuestions.setText(String.format("Preguntas realizadas: %s", totaQuestionString));
+    }
+
+    @Override
+    public void showIfItemIsActive(Boolean isChecked, String itemTitle) {
+
     }
 
     private void goToDialogImage(View view) {

@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import com.example.mlretrocomputacion.MyApp;
 import com.example.mlretrocomputacion.data.Model.Item;
+import com.example.mlretrocomputacion.data.mvp.DetailsInterface;
+import com.example.mlretrocomputacion.data.mvp.DetailsPresenter;
 import com.example.mlretrocomputacion.databinding.FragmentFavoriteBinding;
 import com.example.mlretrocomputacion.ui.home.HomeAdapter;
 import com.example.mlretrocomputacion.ui.home.HomeFragmentDirections;
@@ -28,11 +30,11 @@ import com.example.mlretrocomputacion.ui.home.HomeFragmentDirections;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FavoriteFragment extends Fragment {
+public class FavoriteFragment extends Fragment implements DetailsInterface.view {
 
     private static final String TAG = "FavoriteFragment";
     private List<Item> items;
-    private Boolean isFavorite;
+    private DetailsInterface.presenter presenter;
 
     //widgets
     FragmentFavoriteBinding binding;
@@ -75,6 +77,7 @@ public class FavoriteFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         items = new ArrayList<>();
+        presenter = new DetailsPresenter(this);
         binding.recyclerViewFavorite.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new HomeAdapter(items, getContext());
         binding.recyclerViewFavorite.setAdapter(adapter);
@@ -94,7 +97,7 @@ public class FavoriteFragment extends Fragment {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 favoriteViewModel.deleteFavItem(adapter.getItem(viewHolder.getAdapterPosition()));
-                //Toast.makeText(MyApp.getContext(), "Articulo eliminada de favoritos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyApp.getContext(), "Articulo eliminada de favoritos", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(binding.recyclerViewFavorite);
     }
@@ -113,10 +116,36 @@ public class FavoriteFragment extends Fragment {
     }
 
     private void getListFavItems() {
-
         favoriteViewModel.getListRetroCategory().observe(getViewLifecycleOwner(), mItems -> {
             items = mItems;
             adapter.setData(items);
+            getCheckItemFav(items);
         });
+    }
+
+    private void getCheckItemFav(List<Item> itemsToCheck) {
+        for (int i = 0; i < itemsToCheck.size(); i++){
+            presenter.getItemifActive(itemsToCheck.get(i).getIdItem(), itemsToCheck.get(i).getItemTitle());
+        }
+    }
+
+    @Override
+    public void showItemResult(String title, String condition, Double price, String city, String state, String permalink, List<String> pictures) {
+
+    }
+
+    @Override
+    public void showUserResult(String usuario, String registerSince, Integer transactions, String number_reputation, String color_reputation) {
+
+    }
+
+    @Override
+    public void showQuestionResult(int totalQuestions) {
+
+    }
+
+    @Override
+    public void showIfItemIsActive(Boolean isChecked,String itemTitle) {
+        if (!isChecked) favoriteViewModel.deleteFavItem(itemTitle);
     }
 }

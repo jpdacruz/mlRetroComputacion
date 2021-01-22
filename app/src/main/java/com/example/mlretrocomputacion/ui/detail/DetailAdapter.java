@@ -9,10 +9,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.mlretrocomputacion.R;
-import com.example.mlretrocomputacion.data.Model.Item;
-import com.example.mlretrocomputacion.ui.home.HomeAdapter;
+import com.example.mlretrocomputacion.utils.LoadImage;
 
 import java.util.List;
 
@@ -37,8 +35,8 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String picture = pictures.get(position);
-        Glide.with(context).load(picture).into(holder.ivPictures);
+        String url = pictures.get(position);
+        new LoadImage(holder.ivPictures).execute(url);
     }
 
     @Override
