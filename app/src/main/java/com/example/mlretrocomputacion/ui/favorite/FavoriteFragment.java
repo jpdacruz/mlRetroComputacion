@@ -81,6 +81,7 @@ public class FavoriteFragment extends Fragment implements DetailsInterface.view 
         binding.recyclerViewFavorite.setAdapter(adapter);
 
         adapter.setOnClickListener(view1 -> goToDetailsFav(view1));
+        binding.progressBar.setVisibility(View.INVISIBLE);
         getListFavItems();
         setItemTouchHelp();
     }
@@ -99,6 +100,7 @@ public class FavoriteFragment extends Fragment implements DetailsInterface.view 
     private void getCheckItemFav(List<Item> itemsToCheck) {
         for (int i = 0; i < itemsToCheck.size(); i++){
             presenter.getItemifActive(itemsToCheck.get(i).getIdItem(), itemsToCheck.get(i).getItemTitle());
+            binding.progressBar.setVisibility(View.INVISIBLE);
         }
     }
 

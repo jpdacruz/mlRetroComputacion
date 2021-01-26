@@ -61,6 +61,7 @@ public class QuestionFragment extends Fragment implements QuestionInterface.view
         presenter = new QuestionPresenter(this);
         questions = new ArrayList<>();
 
+        binding.progressBar.setVisibility(View.VISIBLE);
         presenter.getItemQuestions(idItem);
         setAdapter();
     }
@@ -69,6 +70,7 @@ public class QuestionFragment extends Fragment implements QuestionInterface.view
     public void showQuestionResult(List<Question> mQuestions) {
         questions = mQuestions;
         adapter.setData(questions);
+        binding.progressBar.setVisibility(View.INVISIBLE);
     }
 
     private void setAdapter() {

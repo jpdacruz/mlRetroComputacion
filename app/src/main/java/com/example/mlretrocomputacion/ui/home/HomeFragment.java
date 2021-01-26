@@ -70,6 +70,7 @@ public class HomeFragment extends Fragment{
 
         setAdapter();
         setListener();
+        binding.progressBar.setVisibility(View.VISIBLE);
         getListRetroGames();
     }
 
@@ -133,6 +134,8 @@ public class HomeFragment extends Fragment{
         homeViewModel.getListRetroCategory("all").observe(getViewLifecycleOwner(), items -> {
             mItems = items;
             adapter.setData(mItems);
+            binding.progressBar.setVisibility(View.INVISIBLE);
+
         });
     }
 

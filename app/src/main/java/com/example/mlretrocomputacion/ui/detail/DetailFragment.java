@@ -92,6 +92,7 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
 
         setAdapter();
         setListener();
+        binding.progressBar.setVisibility(View.VISIBLE);
         checkIfItemIsFavorite();
 
         presenter.getItemDetails(idItem);
@@ -201,6 +202,7 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
                 binding.tvDetailsReputacion.setTextColor(ContextCompat.getColor(getContext(),reputation_red));
                 break;
         }
+        binding.progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override

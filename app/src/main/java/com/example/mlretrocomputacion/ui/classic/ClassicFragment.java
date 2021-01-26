@@ -69,6 +69,7 @@ public class ClassicFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         setAdapter();
         setListener();
+        binding.progressBar.setVisibility(View.VISIBLE);
         getListClassicConsoles(mConsola);
     }
 
@@ -80,7 +81,6 @@ public class ClassicFragment extends Fragment {
     }
 
     private void setListener() {
-
         adapter.setOnClickListener(view -> goToDetails(view));
     }
 
@@ -88,6 +88,7 @@ public class ClassicFragment extends Fragment {
         homeViewModel.getListRetroCategory(mConsola).observe(getViewLifecycleOwner(), items -> {
             mItems = items;
             adapter.setData(mItems);
+            binding.progressBar.setVisibility(View.INVISIBLE);
         });
     }
 
