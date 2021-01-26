@@ -1,9 +1,9 @@
 package com.example.mlretrocomputacion.data.remote;
 
-import com.example.mlretrocomputacion.data.Model.DetailModel;
-import com.example.mlretrocomputacion.data.Model.ItemResponse;
-import com.example.mlretrocomputacion.data.Model.QuestionModel;
-import com.example.mlretrocomputacion.data.Model.UserModel;
+import com.example.mlretrocomputacion.data.mvp.details.clases.DetailModel;
+import com.example.mlretrocomputacion.data.remote.clases.ItemResponse;
+import com.example.mlretrocomputacion.data.mvp.question.clases.QuestionResponse;
+import com.example.mlretrocomputacion.data.mvp.details.clases.UserModel;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -30,7 +30,7 @@ public interface MlApiService {
     );
 
     @GET("questions/search?")
-    Call<QuestionModel> getQuestionItem(
+    Call<QuestionResponse> getQuestionItem(
             @Query("item") String idItem,
             @Query("api_version") String apiVersion
     );

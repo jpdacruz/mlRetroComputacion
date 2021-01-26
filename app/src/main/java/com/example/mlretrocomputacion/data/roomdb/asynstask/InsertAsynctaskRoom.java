@@ -2,7 +2,7 @@ package com.example.mlretrocomputacion.data.roomdb.asynstask;
 
 import android.os.AsyncTask;
 
-import com.example.mlretrocomputacion.data.Model.Item;
+import com.example.mlretrocomputacion.data.remote.clases.Item;
 import com.example.mlretrocomputacion.data.roomdb.ItemDao;
 
 public class InsertAsynctaskRoom extends AsyncTask<Item, Void, Void> {

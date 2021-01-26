@@ -5,7 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.mlretrocomputacion.data.Model.Item;
+import com.example.mlretrocomputacion.data.remote.clases.Item;
 
 import java.util.List;
 

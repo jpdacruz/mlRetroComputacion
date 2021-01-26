@@ -7,7 +7,6 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
@@ -20,9 +19,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mlretrocomputacion.R;
-import com.example.mlretrocomputacion.data.Model.Item;
-import com.example.mlretrocomputacion.data.mvp.DetailsInterface;
-import com.example.mlretrocomputacion.data.mvp.DetailsPresenter;
+import com.example.mlretrocomputacion.data.remote.clases.Item;
+import com.example.mlretrocomputacion.data.mvp.details.DetailsInterface;
+import com.example.mlretrocomputacion.data.mvp.details.DetailsPresenter;
 import com.example.mlretrocomputacion.databinding.FragmentDetailsBinding;
 import com.example.mlretrocomputacion.ui.favorite.FavoriteViewModel;
 import com.example.mlretrocomputacion.data.utils.Utils;
@@ -97,7 +96,6 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
 
         presenter.getItemDetails(idItem);
         presenter.getUserDetails(idUser);
-        presenter.getItemQuestions(idItem);
     }
 
     private void setAdapter() {
@@ -112,6 +110,13 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
         adapter.setOnClickListener(v -> goToDialogImage(v));
         binding.imageButtonNoFav.setOnClickListener(v -> insertCityRoom());
         binding.buttonWebView.setOnClickListener(v -> goToMl(v));
+        binding.buttonToQuestions.setOnClickListener(v -> goToQuestions(v));
+    }
+
+    private void goToQuestions(View v) {
+        NavController navController = Navigation.findNavController(v);
+        NavDirections action = DetailFragmentDirections.actionDetailsFragmentToQuestionFragment(idItem);
+        navController.navigate(action);
     }
 
     //check if item already is favorite. If not, change imageButton color from grey to yellow
@@ -119,7 +124,7 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
         favoriteViewModel.getListRetroCategory().observe(getViewLifecycleOwner(), mItems -> {
             String idItemToInsert = idItem;
             if (Utils.isItemExist(mItems, idItemToInsert)) {
-                binding.imageButtonNoFav.setVisibility(View.GONE);
+                binding.imageButtonNoFav.setVisibility(View.INVISIBLE);
                 binding.imageButtonFav.setVisibility(View.VISIBLE);
             }
         });
@@ -195,21 +200,6 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
             case "red":
                 binding.tvDetailsReputacion.setTextColor(ContextCompat.getColor(getContext(),reputation_red));
                 break;
-        }
-    }
-
-    /*
-    Show number of question that item has
-     */
-    @Override
-    public void showQuestionResult(int totalQuestions) {
-        String totalQuestionString = String.valueOf(totalQuestions);
-
-        //if server response -> 429 (too many requests)
-        if (totalQuestionString.equals("99999")){
-            binding.tvDetailsNumberQuestions.setText(R.string.question_no_server_response);
-        }else{
-            binding.tvDetailsNumberQuestions.setText(String.format("Preguntas realizadas: %s", totalQuestionString));
         }
     }
 

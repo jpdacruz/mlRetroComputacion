@@ -1,4 +1,6 @@
-package com.example.mlretrocomputacion.data.Model;
+package com.example.mlretrocomputacion.data.remote.clases;
+
+import com.example.mlretrocomputacion.data.remote.clases.ItemModel;
 
 import java.util.List;
 

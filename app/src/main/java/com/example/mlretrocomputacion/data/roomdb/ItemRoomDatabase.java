@@ -6,7 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.example.mlretrocomputacion.data.Model.Item;
+import com.example.mlretrocomputacion.data.remote.clases.Item;
 
 @Database(entities = {Item.class}, version = 1)
 public abstract class ItemRoomDatabase extends RoomDatabase {

@@ -3,7 +3,7 @@ package com.example.mlretrocomputacion.ui.home;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.mlretrocomputacion.data.Model.Item;
+import com.example.mlretrocomputacion.data.remote.clases.Item;
 import com.example.mlretrocomputacion.data.remote.Repository;
 
 import java.util.List;

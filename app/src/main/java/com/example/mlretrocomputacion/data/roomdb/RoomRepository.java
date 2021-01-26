@@ -1,11 +1,9 @@
 package com.example.mlretrocomputacion.data.roomdb;
 
-import android.app.Application;
-
 import androidx.lifecycle.LiveData;
 
 import com.example.mlretrocomputacion.MyApp;
-import com.example.mlretrocomputacion.data.Model.Item;
+import com.example.mlretrocomputacion.data.remote.clases.Item;
 import com.example.mlretrocomputacion.data.roomdb.asynstask.DeleteAsynctaskRoom;
 import com.example.mlretrocomputacion.data.roomdb.asynstask.InsertAsynctaskRoom;
 

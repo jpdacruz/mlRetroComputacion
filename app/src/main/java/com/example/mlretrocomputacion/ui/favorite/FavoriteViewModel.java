@@ -1,12 +1,9 @@
 package com.example.mlretrocomputacion.ui.favorite;
 
-import android.app.Application;
-
-import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.mlretrocomputacion.data.Model.Item;
+import com.example.mlretrocomputacion.data.remote.clases.Item;
 import com.example.mlretrocomputacion.data.roomdb.RoomRepository;
 
 import java.util.List;

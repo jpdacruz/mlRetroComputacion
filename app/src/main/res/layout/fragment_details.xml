@@ -12,15 +12,13 @@
         android:id="@+id/tvDetailsCondition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Condicion"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewPictures" />
 
     <TextView
         android:id="@+id/tvDetailsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Titulo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDetailsCondition" />
 
@@ -28,34 +26,35 @@
         android:id="@+id/imageButtonNoFav"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/ic_favoritegrey"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvDetailsCondition" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/imageButtonFav"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/ic_favoritegold"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvDetailsCondition" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/tvDetailsPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Precio"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewPictures" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailsTitle" />
 
     <TextView
         android:id="@+id/tvDetailsReputacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Reputacion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDetailsUsuario" />
 
@@ -63,15 +62,13 @@
         android:id="@+id/tvDetailsUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Usuario"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDetailsNumberQuestions" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailsPrice" />
 
     <TextView
         android:id="@+id/tvDetailsState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Provincia"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDetailsSales" />
 
@@ -79,7 +76,6 @@
         android:id="@+id/tvDetailsCiudad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ciudad"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDetailsState" />
 
@@ -87,7 +83,6 @@
         android:id="@+id/tvDetailsYearRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Usuario desde"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDetailsReputacion" />
 
@@ -95,17 +90,8 @@
         android:id="@+id/tvDetailsSales"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cantidad de ventas"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDetailsYearRegister" />
-
-    <TextView
-        android:id="@+id/tvDetailsNumberQuestions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cantidad preguntas"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDetailsPrice" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewPictures"
@@ -113,16 +99,31 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDetailsTitle"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonNoFav"
         tools:listitem="@layout/item_list_pictures" />
 
     <Button
         android:id="@+id/buttonWebView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
-        android:text="ver articulo en mercado libre"
+        android:text="@string/show_item_in_ml"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonToQuestions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/success_color"
+        android:text="@string/show_questions"
+        app:layout_constraintBottom_toTopOf="@+id/buttonWebView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

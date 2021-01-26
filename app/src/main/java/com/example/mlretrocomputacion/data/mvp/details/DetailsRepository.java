@@ -1,13 +1,10 @@
-package com.example.mlretrocomputacion.data.remote;
+package com.example.mlretrocomputacion.data.mvp.details;
 
 import android.util.Log;
 
-import com.example.mlretrocomputacion.data.Model.DetailModel;
-import com.example.mlretrocomputacion.data.Model.QuestionModel;
-import com.example.mlretrocomputacion.data.Model.UserModel;
-import com.example.mlretrocomputacion.data.mvp.DetailsInterface;
+import com.example.mlretrocomputacion.data.mvp.details.clases.UserModel;
+import com.example.mlretrocomputacion.data.mvp.details.clases.DetailModel;
 import com.example.mlretrocomputacion.data.remote.RetrofitSingleton;
-import com.example.mlretrocomputacion.data.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +24,6 @@ public class DetailsRepository implements DetailsInterface.repository {
 
     @Override
     public void getItemDetails(String idItem) {
-
         Call<DetailModel> call =
                 RetrofitSingleton.getInstance().getMlApiService().getDetailItem(idItem);
 
@@ -122,39 +118,6 @@ public class DetailsRepository implements DetailsInterface.repository {
             @Override
             public void onFailure(Call<UserModel> call, Throwable t) {
                 Log.i(TAG, "Error Call UserDetail: " + t.toString());
-            }
-        });
-    }
-
-    @Override
-    public void getItemQuestions(String idItem) {
-
-        Call<QuestionModel> call =
-                RetrofitSingleton.getInstance().getMlApiService().getQuestionItem(idItem, Utils.API_VERSION);
-
-        call.enqueue(new Callback<QuestionModel>() {
-            @Override
-            public void onResponse(Call<QuestionModel> call, Response<QuestionModel> response) {
-
-                Integer totalQuestions = null;
-                int respCode = response.code();
-                if (respCode != 429){
-                    try{
-                      totalQuestions = response.body().getTotal();
-                       Log.i(TAG, "TotalQuestion= " + totalQuestions);
-                    }catch(Exception e){
-                      e.printStackTrace();
-                     Log.e(TAG,"Error parsing QuestionModel: " + e.getMessage());
-                    }
-                }else {
-                    totalQuestions = 99999;
-                }
-                presenter.showQuestionResult(totalQuestions);
-            }
-
-            @Override
-            public void onFailure(Call<QuestionModel> call, Throwable t) {
-                Log.i(TAG, "Error Call QuestionDetail: " + t.toString());
             }
         });
     }

@@ -2,7 +2,7 @@ package com.example.mlretrocomputacion.data.utils;
 
 import android.text.TextUtils;
 
-import com.example.mlretrocomputacion.data.Model.Item;
+import com.example.mlretrocomputacion.data.remote.clases.Item;
 
 import java.util.List;
 

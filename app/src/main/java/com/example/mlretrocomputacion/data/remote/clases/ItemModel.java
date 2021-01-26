@@ -1,4 +1,4 @@
-package com.example.mlretrocomputacion.data.Model;
+package com.example.mlretrocomputacion.data.remote.clases;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

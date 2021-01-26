@@ -24,8 +24,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:padding="8dp"
-                android:text="Titulo"
-                android:textSize="@dimen/subtitle_text_size"
+                android:text="@string/item_home_title"
+                android:textSize="@dimen/title_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivItemTumbHome"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -34,10 +34,12 @@
                 android:id="@+id/tvItemPriceHome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:padding="8dp"
-                android:text="Precio"
+                android:text="@string/item_home_price"
                 android:textSize="@dimen/title_text_size"
-                app:layout_constraintStart_toEndOf="@+id/ivItemTumbHome"
+                app:layout_constraintBottom_toBottomOf="@+id/ivItemTumbHome"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvItemTitleHome" />
 
             <ImageView
@@ -47,7 +49,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@android:drawable/stat_notify_error" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

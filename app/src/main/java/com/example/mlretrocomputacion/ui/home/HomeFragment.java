@@ -20,7 +20,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.mlretrocomputacion.R;
-import com.example.mlretrocomputacion.data.Model.Item;
+import com.example.mlretrocomputacion.data.remote.clases.Item;
 import com.example.mlretrocomputacion.databinding.FragmentHomeBinding;
 import com.example.mlretrocomputacion.data.utils.Utils;
 

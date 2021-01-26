@@ -1,6 +1,4 @@
-package com.example.mlretrocomputacion.data.mvp;
-
-import com.example.mlretrocomputacion.data.remote.DetailsRepository;
+package com.example.mlretrocomputacion.data.mvp.details;
 
 import java.util.List;
 
@@ -30,13 +28,6 @@ public class DetailsPresenter implements DetailsInterface.presenter {
     }
 
     @Override
-    public void showQuestionResult(int cod) {
-        if (view!=null){
-            view.showQuestionResult(cod);
-        }
-    }
-
-    @Override
     public void showIfItemIsActive(Boolean isChecked,String itemTitle) {
         if (view!=null){
             view.showIfItemIsActive(isChecked, itemTitle);
@@ -54,13 +45,6 @@ public class DetailsPresenter implements DetailsInterface.presenter {
     public void getUserDetails(Integer idUser) {
         if (view!=null){
             model.getUserDetails(idUser);
-        }
-    }
-
-    @Override
-    public void getItemQuestions(String idItem) {
-        if (view!=null){
-            model.getItemQuestions(idItem);
         }
     }
 

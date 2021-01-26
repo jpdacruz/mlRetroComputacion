@@ -20,12 +20,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.mlretrocomputacion.MyApp;
-import com.example.mlretrocomputacion.data.Model.Item;
-import com.example.mlretrocomputacion.data.mvp.DetailsInterface;
-import com.example.mlretrocomputacion.data.mvp.DetailsPresenter;
+import com.example.mlretrocomputacion.data.remote.clases.Item;
+import com.example.mlretrocomputacion.data.mvp.details.DetailsInterface;
+import com.example.mlretrocomputacion.data.mvp.details.DetailsPresenter;
 import com.example.mlretrocomputacion.databinding.FragmentFavoriteBinding;
 import com.example.mlretrocomputacion.ui.home.HomeAdapter;
-import com.example.mlretrocomputacion.ui.home.HomeFragmentDirections;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,11 +140,6 @@ public class FavoriteFragment extends Fragment implements DetailsInterface.view 
 
     @Override
     public void showUserResult(String usuario, String registerSince, Integer transactions, String number_reputation, String color_reputation) {
-
-    }
-
-    @Override
-    public void showQuestionResult(int totalQuestions) {
 
     }
 

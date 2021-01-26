@@ -16,7 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.mlretrocomputacion.data.Model.Item;
+import com.example.mlretrocomputacion.data.remote.clases.Item;
 import com.example.mlretrocomputacion.databinding.FragmentClassicBinding;
 import com.example.mlretrocomputacion.ui.home.HomeAdapter;
 import com.example.mlretrocomputacion.ui.home.HomeViewModel;

@@ -1,4 +1,4 @@
-package com.example.mlretrocomputacion.data.Model;
+package com.example.mlretrocomputacion.data.remote.clases;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
