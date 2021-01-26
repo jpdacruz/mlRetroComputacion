@@ -7,11 +7,11 @@ import java.util.List;
 public interface QuestionInterface {
 
     interface view{
-        void showQuestionResult(List<Question> questions);
+        void showQuestionResult(List<Question> questions, int error);
     }
 
     interface presenter {
-        void showQuestionResult(List<Question> questions);
+        void showQuestionResult(List<Question> questions, int error);
         void getItemQuestions(String idItem);
     }
 

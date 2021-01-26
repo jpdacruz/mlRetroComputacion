@@ -1,5 +1,6 @@
 package com.example.mlretrocomputacion.data.mvp.question;
 
+import android.os.Handler;
 import android.util.Log;
 
 import com.example.mlretrocomputacion.data.mvp.question.clases.Question;
@@ -26,7 +27,9 @@ public class QuestionRepository implements QuestionInterface.repository{
 
     @Override
     public void getItemQuestions(String idItem) {
+
         listQuestions = new ArrayList<>();
+
         Call<QuestionResponse> call =
                 RetrofitSingleton.getInstance().getMlApiService().getQuestionItem(idItem, Utils.API_VERSION);
 
@@ -35,6 +38,7 @@ public class QuestionRepository implements QuestionInterface.repository{
             public void onResponse(Call<QuestionResponse> call, Response<QuestionResponse> response) {
 
                 int respCode = response.code();
+                int mError;
                 Log.i(TAG, "CODE RESPONSE: " + respCode);
                 if (respCode != 429) {
                     try {
@@ -56,8 +60,11 @@ public class QuestionRepository implements QuestionInterface.repository{
                         e.printStackTrace();
                         Log.e(TAG, "Error parsing QuestionModel: " + e.getMessage());
                     }
+                    mError = 200;
+                }else {
+                    mError = 429;
                 }
-                presenter.showQuestionResult(listQuestions);
+                presenter.showQuestionResult(listQuestions, mError);
             }
 
             @Override

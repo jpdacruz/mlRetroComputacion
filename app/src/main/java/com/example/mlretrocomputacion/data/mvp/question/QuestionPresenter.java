@@ -16,11 +16,10 @@ public class QuestionPresenter implements QuestionInterface.presenter {
     }
 
     @Override
-    public void showQuestionResult(List<Question> questions) {
+    public void showQuestionResult(List<Question> questions, int error) {
         if (view!=null){
-            view.showQuestionResult(questions);
+            view.showQuestionResult(questions, error);
         }
-
     }
 
     @Override

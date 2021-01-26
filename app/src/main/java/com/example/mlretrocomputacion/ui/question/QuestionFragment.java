@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,16 +62,32 @@ public class QuestionFragment extends Fragment implements QuestionInterface.view
         presenter = new QuestionPresenter(this);
         questions = new ArrayList<>();
 
+        setListeners();
+        setAdapter();
         binding.progressBar.setVisibility(View.VISIBLE);
         presenter.getItemQuestions(idItem);
-        setAdapter();
+    }
+
+    private void setListeners() {
+        binding.buttonRetryAction.setOnClickListener(v -> {
+            binding.buttonRetryAction.setVisibility(View.INVISIBLE);
+            presenter.getItemQuestions(idItem);
+        });
     }
 
     @Override
-    public void showQuestionResult(List<Question> mQuestions) {
-        questions = mQuestions;
-        adapter.setData(questions);
-        binding.progressBar.setVisibility(View.INVISIBLE);
+    public void showQuestionResult(List<Question> mQuestions, int error) {
+        if (error == 429){
+            toRetryGetQuestions();
+        }else {
+            questions = mQuestions;
+            adapter.setData(questions);
+            binding.progressBar.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private void toRetryGetQuestions() {
+        binding.buttonRetryAction.setVisibility(View.VISIBLE);
     }
 
     private void setAdapter() {

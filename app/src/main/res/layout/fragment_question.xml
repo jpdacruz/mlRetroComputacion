@@ -8,6 +8,21 @@
     android:layout_margin="8dp"
     android:background="@color/background_main_color">
 
+
+    <Button
+        android:id="@+id/buttonRetryAction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Sin datos Volver a intentarlo"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerQuestion"
         android:layout_width="match_parent"
