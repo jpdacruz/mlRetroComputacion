@@ -29,6 +29,7 @@ public class WebViewFragment extends Fragment {
         if (getArguments() != null) {
             urlMl = WebViewFragmentArgs.fromBundle(getArguments()).getUrl();
         }else {
+            //if arg equals null go to ml site without custom url
             urlMl =" https://mercadolibre.com.ar";
         }
     }

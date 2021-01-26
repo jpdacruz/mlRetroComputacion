@@ -5,6 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+/*
+model class to receive all the information about users
+ */
 public class UserModel {
 
     @SerializedName("id")

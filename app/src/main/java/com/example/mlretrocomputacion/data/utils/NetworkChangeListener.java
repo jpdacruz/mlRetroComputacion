@@ -1,35 +1,50 @@
-package com.example.mlretrocomputacion.utils;
+package com.example.mlretrocomputacion.data.utils;
 
+import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.os.Build;
-import android.text.TextUtils;
-import android.util.Base64;
-import android.widget.Toast;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
 
-import com.example.mlretrocomputacion.data.Model.Item;
+import com.example.mlretrocomputacion.R;
 
-import java.io.ByteArrayOutputStream;
-import java.util.List;
+/*
+BroadcastReciever to check connectivity
+ */
+public class NetworkChangeListener extends BroadcastReceiver {
+    private Button btnRetry;
+    @Override
+    public void onReceive(Context context, Intent intent) {
 
-public class Utils {
+        //internet not connected
+        if(!isNetworkConnected(context)){
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            View layout_dialog = LayoutInflater.from(context).inflate(R.layout.check_internet_dialog, null);
+            builder.setView(layout_dialog);
 
-    public final static String URL_BASE ="https://api.mercadolibre.com/";
-    public final static String API_VERSION = "2#json";
+            btnRetry = layout_dialog.findViewById(R.id.buttonRetry);
 
-    public static boolean validarName(String name) {
-        if (name == null || TextUtils.isEmpty(name)){
-            return false;
-        }else{
-            return true;
+            //show dialog
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            dialog.setCancelable(false);
+            dialog.getWindow().setGravity(Gravity.CENTER);
+
+            btnRetry.setOnClickListener(v -> {
+                dialog.dismiss();
+                onReceive(context,intent);
+            });
         }
     }
 
-    public static boolean isNetworkConnected(Context context) {
+    public boolean isNetworkConnected(Context context) {
         boolean result = false;
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -56,14 +71,5 @@ public class Utils {
             }
         }
         return result;
-    }
-
-    public static boolean isItemExist(List<Item> items, String idItem) {
-        for (Item i : items) {
-            if (i.getIdItem().contains(idItem)) {
-                return true;
-            }
-        }
-        return false;
     }
 }

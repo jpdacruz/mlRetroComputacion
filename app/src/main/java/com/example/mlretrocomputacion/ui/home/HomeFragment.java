@@ -1,6 +1,5 @@
 package com.example.mlretrocomputacion.ui.home;
 
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,7 +8,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,12 +22,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.mlretrocomputacion.R;
 import com.example.mlretrocomputacion.data.Model.Item;
 import com.example.mlretrocomputacion.databinding.FragmentHomeBinding;
-import com.example.mlretrocomputacion.utils.Utils;
+import com.example.mlretrocomputacion.data.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.internal.Util;
 import www.sanju.motiontoast.MotionToast;
 
 public class HomeFragment extends Fragment{
@@ -38,6 +35,7 @@ public class HomeFragment extends Fragment{
     private static final String TAG = "HomeFragment";
     private List<Item> mItems;
     private HomeViewModel homeViewModel;
+
     //widgets
     FragmentHomeBinding binding;
     private HomeAdapter adapter;
@@ -72,7 +70,6 @@ public class HomeFragment extends Fragment{
 
         setAdapter();
         setListener();
-
         getListRetroGames();
     }
 
@@ -82,6 +79,7 @@ public class HomeFragment extends Fragment{
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    //set navigation to favorites
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -110,10 +108,12 @@ public class HomeFragment extends Fragment{
         binding.ivn64.setOnClickListener(v -> goToClassicList(v, "nintendo64"));
         binding.buttonSearch.setOnClickListener(v -> {
             String consola = binding.editTextSearch.getText().toString();
+
+            //check if text to search is null
             if (Utils.validarName(consola)){
                 goToClassicList(v, consola);
             }else{
-                MotionToast.Companion.darkToast(getActivity(),"Ingrese lo que está buscando",
+                MotionToast.Companion.darkToast(getActivity(),"Ingrese el nombre de la consola que está buscando",
                         MotionToast.TOAST_WARNING,
                         MotionToast.GRAVITY_BOTTOM,
                         MotionToast.LONG_DURATION,

@@ -3,13 +3,9 @@ package com.example.mlretrocomputacion.ui;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.example.mlretrocomputacion.R;
-import com.example.mlretrocomputacion.data.remote.Repository;
-import com.example.mlretrocomputacion.utils.NetworkChangeListener;
-import com.facebook.stetho.okhttp3.StethoInterceptor;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.mlretrocomputacion.data.utils.NetworkChangeListener;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -18,12 +14,11 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import okhttp3.OkHttpClient;
-
 public class MainActivity extends AppCompatActivity {
 
     private NavController navController;
     private NetworkChangeListener networkChangeListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_home)
                 .build();
 
+        //set supportActionBar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.ic_logoicon);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
@@ -55,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         registerReceiver(networkChangeListener, intent);
         super.onStart();
     }
-
+    //unregister networkchangelistener
     @Override
     protected void onStop() {
         unregisterReceiver(networkChangeListener);

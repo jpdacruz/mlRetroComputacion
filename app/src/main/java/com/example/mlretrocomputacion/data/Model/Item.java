@@ -4,6 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/*
+Main model class to save data in room database y show required info in reclycerView.
+ */
 @Entity(tableName = "itemTable")
 public class Item {
 

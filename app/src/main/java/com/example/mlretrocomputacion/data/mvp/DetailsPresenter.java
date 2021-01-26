@@ -1,6 +1,6 @@
 package com.example.mlretrocomputacion.data.mvp;
 
-import com.example.mlretrocomputacion.data.Model.Item;
+import com.example.mlretrocomputacion.data.remote.DetailsRepository;
 
 import java.util.List;
 

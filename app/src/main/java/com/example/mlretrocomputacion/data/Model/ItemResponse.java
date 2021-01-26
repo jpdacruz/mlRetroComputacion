@@ -2,6 +2,10 @@ package com.example.mlretrocomputacion.data.Model;
 
 import java.util.List;
 
+/*
+Model class to help with server response.
+Retrieves the information about all items listed in a specific MercadoLibres category -> public List<ItemModel> getResults()
+ */
 public class ItemResponse {
 
     private List<ItemModel> results;

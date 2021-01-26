@@ -1,4 +1,4 @@
-package com.example.mlretrocomputacion.utils;
+package com.example.mlretrocomputacion.data.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,6 +8,9 @@ import android.widget.ImageView;
 
 import java.io.InputStream;
 
+/*
+class AsyncTask to load image in adapter
+ */
 public class LoadImage extends AsyncTask<String, Void, Bitmap> {
 
     ImageView bmImage;

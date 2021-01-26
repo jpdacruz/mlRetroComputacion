@@ -18,7 +18,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.mlretrocomputacion.R;
 import com.example.mlretrocomputacion.data.Model.Item;
@@ -26,8 +25,7 @@ import com.example.mlretrocomputacion.data.mvp.DetailsInterface;
 import com.example.mlretrocomputacion.data.mvp.DetailsPresenter;
 import com.example.mlretrocomputacion.databinding.FragmentDetailsBinding;
 import com.example.mlretrocomputacion.ui.favorite.FavoriteViewModel;
-import com.example.mlretrocomputacion.ui.home.HomeFragmentDirections;
-import com.example.mlretrocomputacion.utils.Utils;
+import com.example.mlretrocomputacion.data.utils.Utils;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -35,7 +33,6 @@ import java.util.List;
 
 import www.sanju.motiontoast.MotionToast;
 
-import static com.example.mlretrocomputacion.R.color.notification_action_color_filter;
 import static com.example.mlretrocomputacion.R.color.reputation_green;
 import static com.example.mlretrocomputacion.R.color.reputation_light_green;
 import static com.example.mlretrocomputacion.R.color.reputation_no;
@@ -93,27 +90,14 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
         //call the presenter
         presenter = new DetailsPresenter(this);
         pictures = new ArrayList<>();
+
         setAdapter();
         setListener();
-
         checkIfItemIsFavorite();
 
         presenter.getItemDetails(idItem);
         presenter.getUserDetails(idUser);
         presenter.getItemQuestions(idItem);
-    }
-
-    private void checkIfItemIsFavorite() {
-        favoriteViewModel.getListRetroCategory().observe(getViewLifecycleOwner(), new Observer<List<Item>>() {
-            @Override
-            public void onChanged(List<Item> mItems) {
-                String idItemToInsert = idItem;
-                if (Utils.isItemExist(mItems, idItemToInsert)) {
-                    binding.imageButtonNoFav.setVisibility(View.GONE);
-                    binding.imageButtonFav.setVisibility(View.VISIBLE);
-                }
-            }
-        });
     }
 
     private void setAdapter() {
@@ -126,13 +110,19 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
 
     private void setListener() {
         adapter.setOnClickListener(v -> goToDialogImage(v));
-        binding.imageButtonNoFav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                insertCityRoom();
+        binding.imageButtonNoFav.setOnClickListener(v -> insertCityRoom());
+        binding.buttonWebView.setOnClickListener(v -> goToMl(v));
+    }
+
+    //check if item already is favorite. If not, change imageButton color from grey to yellow
+    private void checkIfItemIsFavorite() {
+        favoriteViewModel.getListRetroCategory().observe(getViewLifecycleOwner(), mItems -> {
+            String idItemToInsert = idItem;
+            if (Utils.isItemExist(mItems, idItemToInsert)) {
+                binding.imageButtonNoFav.setVisibility(View.GONE);
+                binding.imageButtonFav.setVisibility(View.VISIBLE);
             }
         });
-        binding.buttonWebView.setOnClickListener(v -> goToMl(v));
     }
 
     private void insertCityRoom() {
@@ -146,6 +136,9 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
         navController.navigate(action);
     }
 
+    /*
+    Show Item details: Title, condition, Price, city , (city) state, link (url), pictures.
+     */
     @Override
     public void showItemResult(String title, String condition, Double price, String city, String state, String permalink, List<String> mPictures) {
         item = new Item();
@@ -153,6 +146,8 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
         item.setItemPrice(price);
         item.setIdItem(idItem);
         item.setIdUser(idUser);
+
+        //set thumbnail -> first picture in the list
         item.setThumbnail(mPictures.get(0));
 
         binding.tvDetailsCondition.setText(String.format("Estado: %s", condition));
@@ -165,18 +160,22 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
         adapter.setData(pictures);
     }
 
+    /*
+    Show user details: usuario, register Since, number of transactions, number reputation, color reputation.
+     */
     @Override
-    public void showUserResult(String usuario, String registerSince, Integer transactions, String number_reputation, String color_reputation) {
-        binding.tvDetailsUsuario.setText(String.format("Nick usuario: %s", usuario));
+    public void showUserResult(String user, String registerSince, Integer transactions, String number_reputation, String color_reputation) {
+        binding.tvDetailsUsuario.setText(String.format("Nick usuario: %s", user));
         binding.tvDetailsYearRegister.setText(String.format("Usuario desde el año: %s", registerSince));
         binding.tvDetailsSales.setText(MessageFormat.format("Ventas totales: {0}", transactions));
 
         if (number_reputation.equals("no")){
-            binding.tvDetailsReputacion.setText("Sin reputacion");
+            binding.tvDetailsReputacion.setText(R.string.without_reputation);
         }else{
             binding.tvDetailsReputacion.setText(String.format("Reputacion: %s", number_reputation));
         }
 
+        //if user has no reputation color reputation = grey
         switch (color_reputation){
             case "grey":
                 binding.tvDetailsReputacion.setTextColor(ContextCompat.getColor(getContext(),reputation_no));
@@ -199,14 +198,18 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
         }
     }
 
+    /*
+    Show number of question that item has
+     */
     @Override
     public void showQuestionResult(int totalQuestions) {
-        String totaQuestionString = String.valueOf(totalQuestions);
-        if (totaQuestionString.equals("99999")){
-            presenter.getItemQuestions(idItem);
-            binding.tvDetailsNumberQuestions.setText("Preguntas realizadas: ");
+        String totalQuestionString = String.valueOf(totalQuestions);
+
+        //if server response -> 429 (too many requests)
+        if (totalQuestionString.equals("99999")){
+            binding.tvDetailsNumberQuestions.setText(R.string.question_no_server_response);
         }else{
-            binding.tvDetailsNumberQuestions.setText(String.format("Preguntas realizadas: %s", totaQuestionString));
+            binding.tvDetailsNumberQuestions.setText(String.format("Preguntas realizadas: %s", totalQuestionString));
         }
     }
 
@@ -215,9 +218,9 @@ public class DetailFragment extends Fragment implements DetailsInterface.view {
 
     }
 
+    //show individual image for recycler view
     private void goToDialogImage(View view) {
         String picture = pictures.get(binding.recyclerViewPictures.getChildAdapterPosition(view));
-        Log.i(TAG, "PICTURE: " + picture);
         if (picture != null){
             DialogDetailFragment dialogF = new DialogDetailFragment();
             Bundle bundle = new Bundle();

@@ -1,7 +1,6 @@
 package com.example.mlretrocomputacion.ui.home;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mlretrocomputacion.R;
 import com.example.mlretrocomputacion.data.Model.Item;
-import com.example.mlretrocomputacion.utils.LoadImage;
+import com.example.mlretrocomputacion.data.utils.LoadImage;
 
 import java.util.List;
 
@@ -75,7 +74,6 @@ public class HomeAdapter
         notifyDataSetChanged();
     }
 
-    //todo: revisar cambiar getItemTitle
     public String getItem(int position){
         return items.get(position).getItemTitle();
     }

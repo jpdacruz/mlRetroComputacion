@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mlretrocomputacion.R;
-import com.example.mlretrocomputacion.utils.LoadImage;
+import com.example.mlretrocomputacion.data.utils.LoadImage;
 
 import java.util.List;
 

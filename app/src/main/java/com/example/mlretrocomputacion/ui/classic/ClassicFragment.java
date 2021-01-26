@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -16,31 +15,26 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.mlretrocomputacion.R;
 import com.example.mlretrocomputacion.data.Model.Item;
 import com.example.mlretrocomputacion.databinding.FragmentClassicBinding;
-import com.example.mlretrocomputacion.databinding.FragmentHomeBinding;
-import com.example.mlretrocomputacion.ui.detail.DialogDetailFragment;
 import com.example.mlretrocomputacion.ui.home.HomeAdapter;
-import com.example.mlretrocomputacion.ui.home.HomeFragmentDirections;
 import com.example.mlretrocomputacion.ui.home.HomeViewModel;
-import com.example.mlretrocomputacion.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import www.sanju.motiontoast.MotionToast;
-
 public class ClassicFragment extends Fragment {
 
+    //vars
     private static final String TAG = "ClassicFragment";
-    FragmentClassicBinding binding;
     private HomeViewModel homeViewModel;
     private List<Item> mItems;
     private String mConsola;
+
+    //widgets
     private HomeAdapter adapter;
+    FragmentClassicBinding binding;
 
     public ClassicFragment() {
         // Required empty public constructor

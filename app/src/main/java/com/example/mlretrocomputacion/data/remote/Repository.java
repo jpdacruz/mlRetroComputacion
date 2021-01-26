@@ -28,8 +28,15 @@ public class Repository {
         this.mutableList = new MutableLiveData<>();
     }
 
-    public MutableLiveData<List<Item>> getListRetroCategory(String consola) {
+    /*
+    get list of retro consolas
+    params:
 
+    all -> show all consolas in MLA438566(consolas -> hardware) category
+    consola -> search specific consola in MLA438566(consolas -> hardware) category.
+                list of consolas to search: atari, snes, n64, ps1, genesis.
+     */
+    public MutableLiveData<List<Item>> getListRetroCategory(String consola) {
         Call<ItemResponse> call;
         String mConsola = consola;
 
@@ -43,7 +50,9 @@ public class Repository {
             @Override
             public void onResponse(Call<ItemResponse> call, Response<ItemResponse> response) {
 
-                    for (int i=0; i< response.body().getResults().size(); i++){
+                try{
+                    int responseSize =response.body().getResults().size();
+                    for (int i=0; i< responseSize; i++){
                         Item item = new Item();
                         item.setIdItem(response.body().getResults().get(i).getId());
                         item.setIdUser(response.body().getResults().get(i).getSeller().getId());
@@ -52,7 +61,12 @@ public class Repository {
                         item.setThumbnail(response.body().getResults().get(i).getThumbnail());
                         listItem.add(item);
                     }
-                mutableList.setValue(listItem);
+
+                    mutableList.setValue(listItem);
+                }catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e(TAG, "Error getting console list" + e.getMessage());
+                }
             }
             @Override
             public void onFailure(Call<ItemResponse> call, Throwable t) {

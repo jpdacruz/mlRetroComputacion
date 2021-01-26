@@ -5,6 +5,10 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+/*
+Model class to help with server response.
+Retrieves all the information about ALL item listed in a specific MercadoLibres category -> public List<ItemModel> getResults()
+ */
 public class ItemModel {
 
     @SerializedName("id")

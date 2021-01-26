@@ -56,7 +56,6 @@ public class FavoriteFragment extends Fragment implements DetailsInterface.view 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         favoriteViewModel =
                 new ViewModelProvider(this).get(FavoriteViewModel.class);
         binding = FragmentFavoriteBinding.inflate(inflater, container, false);
@@ -84,7 +83,27 @@ public class FavoriteFragment extends Fragment implements DetailsInterface.view 
 
         adapter.setOnClickListener(view1 -> goToDetailsFav(view1));
         getListFavItems();
+        setItemTouchHelp();
+    }
 
+    //get list of favorite items
+    private void getListFavItems() {
+        favoriteViewModel.getListRetroCategory().observe(getViewLifecycleOwner(), mItems -> {
+            items = mItems;
+            adapter.setData(items);
+            getCheckItemFav(items);
+        });
+    }
+
+    //
+    //check if the item still exists since the last visit
+    private void getCheckItemFav(List<Item> itemsToCheck) {
+        for (int i = 0; i < itemsToCheck.size(); i++){
+            presenter.getItemifActive(itemsToCheck.get(i).getIdItem(), itemsToCheck.get(i).getItemTitle());
+        }
+    }
+
+    private void setItemTouchHelp() {
         //init callback to delete item from recycler view
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback
                 (0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -96,6 +115,7 @@ public class FavoriteFragment extends Fragment implements DetailsInterface.view 
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                //delete favItem from roomdb
                 favoriteViewModel.deleteFavItem(adapter.getItem(viewHolder.getAdapterPosition()));
                 Toast.makeText(MyApp.getContext(), "Articulo eliminada de favoritos", Toast.LENGTH_SHORT).show();
             }
@@ -103,7 +123,6 @@ public class FavoriteFragment extends Fragment implements DetailsInterface.view 
     }
 
     private void goToDetailsFav(View view1) {
-
         Item item = items.get(binding.recyclerViewFavorite.getChildAdapterPosition(view1));
         Integer idUser = item.getIdUser();
         String idItem = item.getIdItem();
@@ -113,20 +132,6 @@ public class FavoriteFragment extends Fragment implements DetailsInterface.view 
         NavController navController = Navigation.findNavController(view1);
         NavDirections action = FavoriteFragmentDirections.actionFavoriteFragmentToDetailsFragment2(idUser,idItem);
         navController.navigate(action);
-    }
-
-    private void getListFavItems() {
-        favoriteViewModel.getListRetroCategory().observe(getViewLifecycleOwner(), mItems -> {
-            items = mItems;
-            adapter.setData(items);
-            getCheckItemFav(items);
-        });
-    }
-
-    private void getCheckItemFav(List<Item> itemsToCheck) {
-        for (int i = 0; i < itemsToCheck.size(); i++){
-            presenter.getItemifActive(itemsToCheck.get(i).getIdItem(), itemsToCheck.get(i).getItemTitle());
-        }
     }
 
     @Override
@@ -146,6 +151,7 @@ public class FavoriteFragment extends Fragment implements DetailsInterface.view 
 
     @Override
     public void showIfItemIsActive(Boolean isChecked,String itemTitle) {
+        //if response !active, delete item from favorite
         if (!isChecked) favoriteViewModel.deleteFavItem(itemTitle);
     }
 }

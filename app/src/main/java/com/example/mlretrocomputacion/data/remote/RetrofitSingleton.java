@@ -1,6 +1,6 @@
 package com.example.mlretrocomputacion.data.remote;
 
-import com.example.mlretrocomputacion.utils.Utils;
+import com.example.mlretrocomputacion.data.utils.Utils;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 
 import okhttp3.OkHttpClient;
